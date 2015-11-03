@@ -15,7 +15,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 			../../Classes/GameOverScene.cpp \
 			../../Classes/GameScene.cpp \
 			../../Classes/MainMenuScene.cpp \
-			../../Classes/PauseScene.cpp 
+			../../Classes/PauseScene.cpp  \
+			../../Classes/Player.cpp 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
