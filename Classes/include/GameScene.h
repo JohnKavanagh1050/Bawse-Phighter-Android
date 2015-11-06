@@ -6,12 +6,17 @@
 #include "GameOverScene.h"
 #include "Player.h"
 #include "GameStates.h"
+#include "Bullet.h"
+#include "Boss.h"
+
 
 class GameScreen : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState; // add this
 	Player * player;
+	Bullet * bullet;
+	Boss * boss;
 
 public:
 	static cocos2d::Scene* createScene();

@@ -53,6 +53,9 @@
     <ClInclude Include="..\Classes\include\Bullet.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\include\Boss.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp">
@@ -83,6 +86,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\src\Bullet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Boss.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

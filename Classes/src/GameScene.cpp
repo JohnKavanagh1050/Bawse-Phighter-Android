@@ -48,6 +48,14 @@ bool GameScreen::init()
 	player->setPosition(Vec2(100, 70));
 	this->addChild(player, 5);
 
+	boss= Boss::create();
+	boss->setPosition(Vec2(300, 300));
+	this->addChild(boss, 5);
+
+	//bullet = Bullet::create();
+	//bullet->setPosition(Vec2(player->getPositionX, player->getPositionY));
+	//this->addChild(bullet, 5);
+
 	return true;
 }
 
@@ -96,5 +104,6 @@ void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d:
 
 void GameScreen::update(float dt)
 {
+	player->update();
 	player->update();
 }

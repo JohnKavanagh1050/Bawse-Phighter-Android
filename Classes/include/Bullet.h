@@ -8,6 +8,8 @@ class Bullet : public cocos2d::Sprite{
 public:
 	static Bullet * create(void);
 	void initBullet();
+	void update();
+
 private:
 
 
