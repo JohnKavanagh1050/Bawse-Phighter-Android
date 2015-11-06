@@ -45,8 +45,7 @@ bool GameScreen::init()
 	addBackGroundSprite(visibleSize, origin);
 
 	player = Player::create();
-	player->setPosition(Vec2(origin.x + visibleSize.width / 2
-		, origin.y + visibleSize.height / 2));
+	player->setPosition(Vec2(100, 70));
 	this->addChild(player, 5);
 
 	return true;

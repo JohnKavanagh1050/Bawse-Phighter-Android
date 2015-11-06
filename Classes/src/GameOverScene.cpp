@@ -30,7 +30,7 @@ bool GameOver::init()
 		NULL);
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	menu->alignItemsVerticallyWithPadding(visibleSize.height / 6);
+	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
 	this->addChild(menu);
 
 	return true;
