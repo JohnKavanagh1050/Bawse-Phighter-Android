@@ -15,21 +15,15 @@ Player * Player::create()
 	return NULL;
 }
 
-void Player::moveRL(int directionParam)
+void Player::move(int directionParam)
 {
 	direction = directionParam;
-	movingRL = true;
-}
-
-void Player::moveUD(int directionParam)
-{
-	direction = directionParam;
-	movingUD = true;
+	moving = true;
 }
 
 void Player::update()
 {
-	if (movingRL) //check if moving
+	if (moving) //check if moving
 	{
 		if (direction == 0) //check if going left
 		{
@@ -40,17 +34,11 @@ void Player::update()
 			this->setPositionX(this->getPositionX() + 5);
 		}
 	}
-	if (movingUD) //check if moving
-	{
-		if (direction == 2)
-		{
-			this->setPositionY(this->getPositionY() + 5);
-		}
-		 if (direction == 3)
-		{
-			this->setPositionY(this->getPositionY() - 5);
-		}
-	}
+}
+
+void Player::idle()
+{
+	moving = false;
 }
 
 void Player::initPlayer(){

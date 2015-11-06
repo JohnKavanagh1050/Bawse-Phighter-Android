@@ -7,13 +7,15 @@
 class Player : public cocos2d::Sprite{
 public:
 	static Player * create(void);
-	void moveRL(int directionParam);
-	void moveUD(int directionParam);
+	void move(int directionParam);
 	void update();
+	void Boundaries();
+	void idle();
+
 private:
 	void initPlayer();
 	int direction;
-	bool movingRL;
-	bool movingUD;
+	bool moving;
+
 
 };

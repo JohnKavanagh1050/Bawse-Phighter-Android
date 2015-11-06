@@ -69,22 +69,19 @@ bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 {
 	if (touch->getLocation().x < player->getPositionX())
 	{
-		player->moveRL(0); // param '0' for left
+		player->move(0); // param '0' for left
 	}
 	if (touch->getLocation().x > player->getPositionX())
 	{
-		player->moveRL(1); // param '1' for right
-	}
-	if (touch->getLocation().y < player->getPositionY())
-	{
-		player->moveUD(0); // param '0' for down
-	}
-	if (touch->getLocation().y > player->getPositionY())
-	{
-		player->moveUD(1); // param '1' for up
+		player->move(1); // param '1' for right
 	}
 
 	return true;
+}
+
+void GameScreen::onTouchEnded(Touch *touch, Event *event)
+{
+	player->idle();
 }
 
 void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)
