@@ -16,6 +16,4 @@ private:
 	void initPlayer();
 	int direction;
 	bool moving;
-
-
 };

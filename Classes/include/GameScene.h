@@ -6,8 +6,8 @@
 #include "GameOverScene.h"
 #include "Player.h"
 #include "GameStates.h"
-#include "Bullet.h"
 #include "Boss.h"
+#include "BulletManager.h"
 
 
 class GameScreen : public cocos2d::Layer
@@ -15,7 +15,6 @@ class GameScreen : public cocos2d::Layer
 private:
 	GameStates m_gameState; // add this
 	Player * player;
-	Bullet * bullet;
 	Boss * boss;
 
 public:

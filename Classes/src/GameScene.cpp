@@ -52,10 +52,6 @@ bool GameScreen::init()
 	boss->setPosition(Vec2(300, 300));
 	this->addChild(boss, 5);
 
-	//bullet = Bullet::create();
-	//bullet->setPosition(Vec2(player->getPositionX, player->getPositionY));
-	//this->addChild(bullet, 5);
-
 	return true;
 }
 
@@ -106,4 +102,5 @@ void GameScreen::update(float dt)
 {
 	player->update();
 	player->update();
+	BulletManager::GetInstance()->update();
 }
