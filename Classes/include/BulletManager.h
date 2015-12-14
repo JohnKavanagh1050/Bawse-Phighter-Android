@@ -9,7 +9,6 @@
 class BulletManager{
 public:
 	static BulletManager* GetInstance();
-	void initBullet();
 	void update();
 
 private:
