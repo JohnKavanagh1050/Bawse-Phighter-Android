@@ -42,6 +42,10 @@ bool MainMenu::init()
 	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
 	this->addChild(menu);
 
+	
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
+		"MenuMusic.wav", true);
+
 	return true;
 }
 
@@ -49,12 +53,16 @@ void MainMenu::activateGameScene(Ref * pSender)
 {
 	auto scene = GameScreen::createScene();
 	Director::getInstance()->replaceScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
+		"MenuMusic.wav");
 }
 
 void MainMenu::activateUpgradeScene(Ref * pSender)
 {
 	auto scene = UpgradeMenu::createScene();
 	Director::getInstance()->replaceScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
+		"MenuMusic.wav");
 }
 
 void MainMenu::exitGame(Ref* pSender)
