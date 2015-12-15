@@ -14,9 +14,10 @@ Player * Player::create()
 	return NULL;
 }
 
-void Player::move(int directionParam)
+void Player::move(float x ,float y)
 {
-	direction = directionParam;
+	dirX = x;
+	dirY = y;
 	moving = true;
 }
 
@@ -24,24 +25,27 @@ void Player::update()
 {
 	if (moving) //check if moving
 	{
-		if (direction == 0) //check if going left
-		{
-			this->setPositionX(this->getPositionX() - 5);
-		}
-		else if (direction == 1)
-		{
-			this->setPositionX(this->getPositionX() + 5);
-		}
+		setPositionX(getPosition().x + dirX * speed);
+		setPositionY(getPosition().y + dirY * speed) ;
 
-		else if (direction == 2) //check if going left
-		{
-			this->setPositionY(this->getPositionY() - 5);
-		}
+		//if (direction == 0) //check if going left
+		//{
+		//	this->setPositionX(this->getPositionX() - 5);
+		//}
+		//else if (direction == 1)
+		//{
+		//	this->setPositionX(this->getPositionX() + 5);
+		//}
 
-		else if (direction == 3)
-		{
-			this->setPositionY(this->getPositionY() + 5);
-		}
+		//else if (direction == 2) //check if going left
+		//{
+		//	this->setPositionY(this->getPositionY() - 5);
+		//}
+
+		//else if (direction == 3)
+		//{
+		//	this->setPositionY(this->getPositionY() + 5);
+		//}
 	}
 }
 
@@ -51,7 +55,8 @@ void Player::idle()
 }
 
 void Player::initPlayer(){
-
+	speed = 5.f;
+	dirX = dirY = 0;
 }
 
 

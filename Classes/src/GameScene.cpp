@@ -76,23 +76,13 @@ void GameScreen::activateGameOverScene(Ref *pSender)
 
 bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 {
-	if (touch->getLocation().x < player->getPositionX())
-	{
-		player->move(0); // param '0' for left
-	}
-	else if (touch->getLocation().x > player->getPositionX())
-	{
-		player->move(1); // param '1' for right
-	}
+	float x = touch->getLocation().x - player->getPosition().x;
+	float y = touch->getLocation().y - player->getPosition().y;
+	float magnitude = sqrtf(powf(x, 2) + powf(y, 2));
+	x /= magnitude;
+	y /= magnitude;
 
-	if (touch->getLocation().y < player->getPositionY())
-	{
-		player->move(2); // param '2 for bottom
-	}
-	else if (touch->getLocation().y > player->getPositionY())
-	{
-		player->move(3); // param '3' for top
-	}
+	player->move(x, y);
 
 	return true;
 }
