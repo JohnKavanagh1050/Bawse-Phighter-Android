@@ -58,6 +58,9 @@ bool GameScreen::init()
 
 	updateBulletManager = std::bind(&BulletManager::update, BulletManager::GetInstance(), std::placeholders::_1);
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
+		"GameMusic.wav", true);
+
 	return true;
 }
 
@@ -66,12 +69,16 @@ void GameScreen::activatePauseScene(Ref *pSender)
 	//auto scene = PauseMenu::createScene();
 	auto scene = GameOver::createScene();
 	Director::getInstance()->pushScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
+		"GameMusic.wav");
 }
 
 void GameScreen::activateGameOverScene(Ref *pSender)
 {
 	auto scene = GameOver::createScene();
 	Director::getInstance()->replaceScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
+		"GameMusic.wav");
 }
 
 bool GameScreen::onTouchBegan(Touch *touch, Event *event)

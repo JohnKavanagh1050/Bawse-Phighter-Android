@@ -55,14 +55,14 @@ void MainMenu::activateGameScene(Ref * pSender)
 	Director::getInstance()->replaceScene(scene);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
 		"MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
+		"GameMusic.wav", true);
 }
 
 void MainMenu::activateUpgradeScene(Ref * pSender)
 {
 	auto scene = UpgradeMenu::createScene();
 	Director::getInstance()->replaceScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"MenuMusic.wav");
 }
 
 void MainMenu::exitGame(Ref* pSender)

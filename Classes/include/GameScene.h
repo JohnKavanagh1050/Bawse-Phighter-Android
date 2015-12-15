@@ -8,6 +8,7 @@
 #include "GameStates.h"
 #include "Boss.h"
 #include "BulletManager.h"
+#include "SimpleAudioEngine.h"  
 
 class GameScreen : public cocos2d::Layer
 {
