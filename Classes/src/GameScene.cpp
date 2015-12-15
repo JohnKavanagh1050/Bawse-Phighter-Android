@@ -52,6 +52,12 @@ bool GameScreen::init()
 	boss->setPosition(Vec2(300, 300));
 	this->addChild(boss, 5);
 
+	//bullet = Bullet::create();
+	//bullet->setPosition(player->getPositionX(), player->getPositionX());
+	//this->addChild(bullet, 5);
+
+	updateBulletManager = std::bind(&BulletManager::update, BulletManager::GetInstance(), std::placeholders::_1);
+
 	return true;
 }
 
@@ -74,9 +80,18 @@ bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 	{
 		player->move(0); // param '0' for left
 	}
-	if (touch->getLocation().x > player->getPositionX())
+	else if (touch->getLocation().x > player->getPositionX())
 	{
 		player->move(1); // param '1' for right
+	}
+
+	if (touch->getLocation().y < player->getPositionY())
+	{
+		player->move(2); // param '2 for bottom
+	}
+	else if (touch->getLocation().y > player->getPositionY())
+	{
+		player->move(3); // param '3' for top
 	}
 
 	return true;
@@ -102,5 +117,9 @@ void GameScreen::update(float dt)
 {
 	player->update();
 	player->update();
-	BulletManager::GetInstance()->update();
+	//bullet->update();
+	Bullet* newBullet = updateBulletManager(this);
+	if (newBullet) {
+		newBullet->setPosition(player->getPositionX(), player->getPositionY());
+	}
 }

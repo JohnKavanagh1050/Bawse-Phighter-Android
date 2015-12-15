@@ -15,14 +15,21 @@ BulletManager* BulletManager::GetInstance() {
 	}
 }
 
-void BulletManager::update()
+
+Bullet* BulletManager::update(GameScreen* world)
 {
-	if (counter % (SECOND * 3) == 0){
-		currentBullets.push_back(new Bullet());
+	Bullet* newBullet = nullptr;
+
+	if (counter % (SECOND / 4) == 0){
+		newBullet = Bullet::create();
+		currentBullets.push_back(newBullet);
+		world->addChild(newBullet, 5);
 		counter = 0;
 	}
 	for each (Bullet* e in currentBullets) {
 		e->update();
 	}
 	counter++;
+
+	return newBullet;
 }

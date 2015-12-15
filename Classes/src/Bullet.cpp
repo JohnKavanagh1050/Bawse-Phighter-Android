@@ -17,7 +17,7 @@ Bullet * Bullet::create()
 
 
 void Bullet::initBullet(){
-	
+
 }
 
 void Bullet::update()

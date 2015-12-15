@@ -6,10 +6,15 @@
 #include "GameData.h"
 #include "Bullet.h"
 
+
+class GameScreen;
+
 class BulletManager{
 public:
 	static BulletManager* GetInstance();
-	void update();
+
+	//Return a pointer to a new bullet if ne wa created. Otherwise null.
+	Bullet* update(GameScreen* world);
 
 private:
 	std::list<Bullet*> currentBullets;
@@ -20,5 +25,5 @@ private:
 	static BulletManager* instance;
 	static bool instanceFlag;
 };
-
+#include "GameScene.h"
 #endif

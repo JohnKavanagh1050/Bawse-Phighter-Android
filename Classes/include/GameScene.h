@@ -9,13 +9,15 @@
 #include "Boss.h"
 #include "BulletManager.h"
 
-
 class GameScreen : public cocos2d::Layer
 {
 private:
-	GameStates m_gameState; // add this
+	GameStates m_gameState;
 	Player * player;
 	Boss * boss;
+	Bullet * bullet;
+
+	std::function<Bullet*(GameScreen*)> updateBulletManager;
 
 public:
 	static cocos2d::Scene* createScene();

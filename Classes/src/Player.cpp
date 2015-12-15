@@ -28,9 +28,19 @@ void Player::update()
 		{
 			this->setPositionX(this->getPositionX() - 5);
 		}
-		if (direction == 1)
+		else if (direction == 1)
 		{
 			this->setPositionX(this->getPositionX() + 5);
+		}
+
+		else if (direction == 2) //check if going left
+		{
+			this->setPositionY(this->getPositionY() - 5);
+		}
+
+		else if (direction == 3)
+		{
+			this->setPositionY(this->getPositionY() + 5);
 		}
 	}
 }
