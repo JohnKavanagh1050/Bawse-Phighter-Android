@@ -4,7 +4,6 @@
 #include "GameScene.h"
 #include "UpgradeScene.h"
 
-
 class MainMenu : public cocos2d::Layer
 {
 public:

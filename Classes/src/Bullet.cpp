@@ -1,4 +1,3 @@
-#include "GameScene.h"
 #include "Bullet.h"
 
 Bullet * Bullet::create()
@@ -14,7 +13,6 @@ Bullet * Bullet::create()
 	CC_SAFE_DELETE(bullet);
 	return NULL;
 }
-
 
 void Bullet::initBullet(){
 

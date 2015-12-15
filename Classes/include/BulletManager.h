@@ -20,8 +20,8 @@ private:
 	std::list<Bullet*> currentBullets;
 	const short SECOND = 60;
 	short counter;
-
-	BulletManager::BulletManager() {}
+	
+	//BulletManager::BulletManager() {}
 	static BulletManager* instance;
 	static bool instanceFlag;
 };

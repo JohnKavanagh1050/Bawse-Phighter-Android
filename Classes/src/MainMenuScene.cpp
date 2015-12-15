@@ -36,7 +36,7 @@ bool MainMenu::init()
 		"MainMenuScreen/Exit_Button(Click).png",
 		CC_CALLBACK_1(MainMenu::exitGame, this));
 	auto menu = Menu::create(menuTitle, playItem, upgradeItem, exitItem, NULL);
-
+	//CCTransitionFade TransitionFade::
 	// Returns visible size of OpenGL window in points.
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);

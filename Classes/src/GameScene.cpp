@@ -83,6 +83,8 @@ void GameScreen::activateGameOverScene(Ref *pSender)
 
 bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 {
+
+	//get location of my touch event for player movement
 	float x = touch->getLocation().x - player->getPosition().x;
 	float y = touch->getLocation().y - player->getPosition().y;
 	float magnitude = sqrtf(powf(x, 2) + powf(y, 2));
@@ -114,9 +116,18 @@ void GameScreen::update(float dt)
 {
 	player->update();
 	player->update();
-	//bullet->update();
+	boss->update();
 	Bullet* newBullet = updateBulletManager(this);
 	if (newBullet) {
 		newBullet->setPosition(player->getPositionX(), player->getPositionY());
+	}
+
+	if (boss->getPosition().x > player->getPositionX())
+	{
+		boss->move(0); // param '0' for left
+	}
+	if (boss->getPosition().x < player->getPositionX())
+	{
+		boss->move(1); // param '0' for right
 	}
 }

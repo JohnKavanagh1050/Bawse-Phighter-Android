@@ -16,5 +16,4 @@ private:
 	int direction;
 	bool moving;
 
-
 };

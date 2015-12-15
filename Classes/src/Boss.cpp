@@ -1,4 +1,3 @@
-#include "GameScene.h"
 #include "Boss.h"
 
 Boss * Boss::create()
@@ -23,7 +22,17 @@ void Boss::move(int directionParam)
 
 void Boss::update()
 {
-	
+	if (moving) //check if moving
+	{
+		if (direction == 0) //check if going left
+		{
+			this->setPositionX(this->getPositionX() - 3);
+		}
+		else if (direction == 1)  //right
+		{
+			this->setPositionX(this->getPositionX() + 3);
+		}
+	}
 }
 
 void Boss::idle()
@@ -32,6 +41,6 @@ void Boss::idle()
 }
 
 void Boss::initBoss(){
-
+	//speed = 5.f;
+	//dirX = dirY = 0;
 }
-
