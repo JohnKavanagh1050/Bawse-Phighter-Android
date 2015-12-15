@@ -49,7 +49,7 @@ bool GameScreen::init()
 	this->addChild(player, 5);
 
 	boss= Boss::create();
-	boss->setPosition(Vec2(300, 300));
+	boss->setPosition(Vec2(300, 500));
 	this->addChild(boss, 5);
 
 	//bullet = Bullet::create();

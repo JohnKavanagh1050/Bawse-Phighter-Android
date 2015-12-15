@@ -15,7 +15,6 @@ BulletManager* BulletManager::GetInstance() {
 	}
 }
 
-
 Bullet* BulletManager::update(GameScreen* world)
 {
 	Bullet* newBullet = nullptr;
@@ -26,8 +25,10 @@ Bullet* BulletManager::update(GameScreen* world)
 		world->addChild(newBullet, 5);
 		counter = 0;
 	}
-	for each (Bullet* e in currentBullets) {
-		e->update();
+	//like a for each statement
+	for (Bullet* e : currentBullets) {
+		//had to change from for each e was out of scope before it would compile apk
+		e->updatePlayerBullet();
 	}
 	counter++;
 

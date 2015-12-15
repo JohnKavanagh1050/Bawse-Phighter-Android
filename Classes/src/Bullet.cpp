@@ -18,7 +18,12 @@ void Bullet::initBullet(){
 
 }
 
-void Bullet::update()
+void Bullet::updatePlayerBullet()
 {
 	setPositionY(getPositionY() + 5);
+}
+
+void Bullet::updateBossBullet()
+{
+	setPositionY(getPositionY() - 5);
 }
