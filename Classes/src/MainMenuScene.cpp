@@ -29,7 +29,8 @@ bool MainMenu::init()
 		CC_CALLBACK_1(MainMenu::activateGameScene, this));
 	auto upgradeItem =
 		MenuItemImage::create("MainMenuScreen/Upgrade_Button.png",
-		"MainMenuScreen/Upgrade_Button(Click).png");
+		"MainMenuScreen/Upgrade_Button(Click).png",
+	CC_CALLBACK_1(MainMenu::activateUpgradeScene, this));
 	auto exitItem =
 		MenuItemImage::create("MainMenuScreen/Exit_Button.png",
 		"MainMenuScreen/Exit_Button(Click).png",
@@ -47,6 +48,12 @@ bool MainMenu::init()
 void MainMenu::activateGameScene(Ref * pSender)
 {
 	auto scene = GameScreen::createScene();
+	Director::getInstance()->replaceScene(scene);
+}
+
+void MainMenu::activateUpgradeScene(Ref * pSender)
+{
+	auto scene = UpgradeMenu::createScene();
 	Director::getInstance()->replaceScene(scene);
 }
 

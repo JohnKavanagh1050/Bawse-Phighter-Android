@@ -173,6 +173,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\include\PauseScene.h" />
     <ClInclude Include="..\Classes\include\Player.h" />
     <ClInclude Include="..\Classes\include\resource.h" />
+    <ClInclude Include="..\Classes\include\UpgradeScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp" />
@@ -187,6 +188,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\src\MainMenuScene.cpp" />
     <ClCompile Include="..\Classes\src\PauseScene.cpp" />
     <ClCompile Include="..\Classes\src\Player.cpp" />
+    <ClCompile Include="..\Classes\src\UpgradeScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
