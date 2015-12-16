@@ -1,16 +1,30 @@
 #include "Bullet.h"
 
-Bullet * Bullet::create()
+Bullet * Bullet::createPlayerBullet()
 {
-	Bullet * bullet = new Bullet();
-	if (bullet && bullet->initWithFile("GameScreen/bullet.png"))
+	Bullet * playerBullet = new Bullet();
+	if (playerBullet && playerBullet->initWithFile("GameScreen/bullet.png"))
 	{
-		bullet->autorelease();
-		bullet->initBullet();
-		return bullet;
+		playerBullet->autorelease();
+		playerBullet->initBullet();
+		return playerBullet;
 	}
 
-	CC_SAFE_DELETE(bullet);
+	CC_SAFE_DELETE(playerBullet);
+	return NULL;
+}
+
+Bullet * Bullet::createBossBullet()
+{
+	Bullet * bossBullet = new Bullet();
+	if (bossBullet && bossBullet->initWithFile("GameScreen/enemy bullet.png"))
+	{
+		bossBullet->autorelease();
+		bossBullet->initBullet();
+		return bossBullet;
+	}
+
+	CC_SAFE_DELETE(bossBullet);
 	return NULL;
 }
 
@@ -25,5 +39,5 @@ void Bullet::updatePlayerBullet()
 
 void Bullet::updateBossBullet()
 {
-	setPositionY(getPositionY() - 5);
+	setPositionY(getPositionY() - 3);
 }

@@ -14,12 +14,14 @@ public:
 	static BulletManager* GetInstance();
 
 	//Return a pointer to a new bullet if ne wa created. Otherwise null.
-	Bullet* update(GameScreen* world);
+	void update(GameScreen* world, Bullet* &playerBullet, Bullet* &bossBullet);
 
 private:
-	std::list<Bullet*> currentBullets;
+	std::list<Bullet*> currentPlayerBullets;
+	std::list<Bullet*> currentBossBullets;
 	const short SECOND = 60;
-	short counter;
+	short bossCounter;
+	short playerCounter;
 	
 	//BulletManager::BulletManager() {}
 	static BulletManager* instance;

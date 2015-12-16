@@ -26,11 +26,11 @@ void Boss::update()
 	{
 		if (direction == 0) //check if going left
 		{
-			this->setPositionX(this->getPositionX() - 3);
+			this->setPositionX(this->getPositionX() - 2);
 		}
 		else if (direction == 1)  //right
 		{
-			this->setPositionX(this->getPositionX() + 3);
+			this->setPositionX(this->getPositionX() + 2);
 		}
 	}
 }

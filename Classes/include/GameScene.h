@@ -18,7 +18,7 @@ private:
 	Boss * boss;
 	Bullet * bullet;
 
-	std::function<Bullet*(GameScreen*)> updateBulletManager;
+	std::function<void(GameScreen*, Bullet*&, Bullet*&)> updateBulletManager;
 
 public:
 	static cocos2d::Scene* createScene();

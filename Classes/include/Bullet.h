@@ -6,7 +6,8 @@
 
 class Bullet : public cocos2d::Sprite{
 public:
-	static Bullet * create(void);
+	static Bullet * createPlayerBullet(void);
+	static Bullet * createBossBullet(void);
 	void initBullet();
 	void updatePlayerBullet();
 	void updateBossBullet();

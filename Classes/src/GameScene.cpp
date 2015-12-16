@@ -49,14 +49,19 @@ bool GameScreen::init()
 	this->addChild(player, 5);
 
 	boss= Boss::create();
-	boss->setPosition(Vec2(300, 500));
+	boss->setPosition(Vec2(300, 350));
 	this->addChild(boss, 5);
 
 	//bullet = Bullet::create();
 	//bullet->setPosition(player->getPositionX(), player->getPositionX());
 	//this->addChild(bullet, 5);
 
-	updateBulletManager = std::bind(&BulletManager::update, BulletManager::GetInstance(), std::placeholders::_1);
+	updateBulletManager = std::bind(
+		&BulletManager::update,
+		BulletManager::GetInstance(),
+		std::placeholders::_1,//this
+		std::placeholders::_2,//player bullet
+		std::placeholders::_3);//boss bullet
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		"GameMusic.wav", true);
@@ -83,7 +88,6 @@ void GameScreen::activateGameOverScene(Ref *pSender)
 
 bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 {
-
 	//get location of my touch event for player movement
 	float x = touch->getLocation().x - player->getPosition().x;
 	float y = touch->getLocation().y - player->getPosition().y;
@@ -115,13 +119,22 @@ void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d:
 void GameScreen::update(float dt)
 {
 	player->update();
-	player->update();
 	boss->update();
-	Bullet* newBullet = updateBulletManager(this);
-	if (newBullet) {
-		newBullet->setPosition(player->getPositionX(), player->getPositionY());
+
+	Bullet* playerBullet = nullptr;
+	Bullet* bossBullet = nullptr;
+	updateBulletManager(this, playerBullet, bossBullet);
+
+	if (bossBullet) {
+		bossBullet->setPosition(boss->getPositionX(), boss->getPositionY());
+	}
+	if (playerBullet) {
+	
+		playerBullet->setPosition(player->getPositionX(), player->getPositionY());
 	}
 
+
+	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{
 		boss->move(0); // param '0' for left
