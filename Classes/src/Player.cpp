@@ -48,6 +48,9 @@ void Player::update()
 		//}
 	}
 }
+void Player::LoseLives(){
+	lives--;
+}
 
 void Player::idle()
 {

@@ -15,6 +15,16 @@ BulletManager* BulletManager::GetInstance() {
 	}
 }
 
+void BulletManager::deleteBossBullet(GameScreen* world, Bullet* &bossBullet)
+{
+	world->removeChild(bossBullet);
+}
+
+void BulletManager::deletePlayerBullet(GameScreen* world, Bullet* &playerBullet)
+{
+	world->removeChild(playerBullet);
+}
+
 void BulletManager::update(GameScreen* world, Bullet* &playerBullet, Bullet* &bossBullet)
 {
 
@@ -35,11 +45,28 @@ void BulletManager::update(GameScreen* world, Bullet* &playerBullet, Bullet* &bo
 	for (Bullet* e : currentPlayerBullets) {
 		//had to change from for each e was out of scope before it would compile apk
 		e->updatePlayerBullet();
+		if (pBullet){
+			//deletePlayerBullet(world, playerBullet);
+		}
 	}
 
 	for (Bullet* f : currentBossBullets) {
 		f->updateBossBullet();
+		if (bBullet){
+			deleteBossBullet(world, bossBullet);
+		}
 	}
+
+	/*if (player && bossBullet) {
+		auto p_pos = player->getPosition();
+		auto b_pos = bossBullet->getPosition();
+
+		if (b_pos.x > p_pos.x && b_pos.x + 20 < p_pos.x &&
+			b_pos.y > p_pos.y && b_pos.y + 20 < p_pos.y){
+			player->LoseLives();
+
+		}
+		*/
 	playerCounter++;
 	bossCounter++;
 

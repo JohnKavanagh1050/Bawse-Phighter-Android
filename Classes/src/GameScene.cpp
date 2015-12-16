@@ -133,7 +133,6 @@ void GameScreen::update(float dt)
 		playerBullet->setPosition(player->getPositionX(), player->getPositionY());
 	}
 
-
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{

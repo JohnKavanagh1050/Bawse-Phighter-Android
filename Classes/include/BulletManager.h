@@ -6,15 +6,20 @@
 #include "GameData.h"
 #include "Bullet.h"
 
-
 class GameScreen;
 
 class BulletManager{
 public:
 	static BulletManager* GetInstance();
 
+	//void setPlayer(Player* player);
+	//void setBoss(Boss* player);
+	//bool checkCollision();
+
 	//Return a pointer to a new bullet if ne wa created. Otherwise null.
 	void update(GameScreen* world, Bullet* &playerBullet, Bullet* &bossBullet);
+	void deleteBossBullet(GameScreen* world,  Bullet* &bossBullet);
+	void deletePlayerBullet(GameScreen* world, Bullet* &playerBullet);
 
 private:
 	std::list<Bullet*> currentPlayerBullets;
@@ -22,8 +27,8 @@ private:
 	const short SECOND = 60;
 	short bossCounter;
 	short playerCounter;
-	
-	//BulletManager::BulletManager() {}
+	bool pBullet = false;
+	bool bBullet = false;
 	static BulletManager* instance;
 	static bool instanceFlag;
 };

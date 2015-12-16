@@ -11,10 +11,12 @@ public:
 	void update();
 	void Boundaries();
 	void idle();
+	void LoseLives();
 
 private:
 	void initPlayer();
 	float dirX, dirY;
 	bool moving;
 	float speed;
+	float lives = 100;
 };
