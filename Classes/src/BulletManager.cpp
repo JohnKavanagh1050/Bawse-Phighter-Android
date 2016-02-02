@@ -41,12 +41,13 @@ void BulletManager::update(GameScreen* world, Bullet* &playerBullet, Bullet* &bo
 		world->addChild(playerBullet, 5);
 		playerCounter = 0;
 	}
+
 	//like a for each statement
 	for (Bullet* e : currentPlayerBullets) {
 		//had to change from for each e was out of scope before it would compile apk
 		e->updatePlayerBullet();
 		if (pBullet){
-			//deletePlayerBullet(world, playerBullet);
+			deletePlayerBullet(world, playerBullet);
 		}
 	}
 

@@ -47,14 +47,18 @@ bool GameScreen::init()
 	player = Player::create();
 	player->setPosition(Vec2(100, 70));
 	this->addChild(player, 5);
+	CCRect playerRect = CCRectMake(
+		player->getPosition().x - (player->getContentSize().width / 2),
+		player->getPosition().y - (player->getContentSize().height / 2),
+		player->getContentSize().width, player->getContentSize().height);
 
 	boss= Boss::create();
 	boss->setPosition(Vec2(300, 350));
 	this->addChild(boss, 5);
-
-	//bullet = Bullet::create();
-	//bullet->setPosition(player->getPositionX(), player->getPositionX());
-	//this->addChild(bullet, 5);
+	CCRect bossRect = CCRectMake(
+		boss->getPosition().x - (boss->getContentSize().width / 2),
+		boss->getPosition().y - (boss->getContentSize().height / 2),
+		boss->getContentSize().width, boss->getContentSize().height);
 
 	updateBulletManager = std::bind(
 		&BulletManager::update,
@@ -129,7 +133,6 @@ void GameScreen::update(float dt)
 		bossBullet->setPosition(boss->getPositionX(), boss->getPositionY());
 	}
 	if (playerBullet) {
-	
 		playerBullet->setPosition(player->getPositionX(), player->getPositionY());
 	}
 
@@ -140,6 +143,6 @@ void GameScreen::update(float dt)
 	}
 	if (boss->getPosition().x < player->getPositionX())
 	{
-		boss->move(1); // param '0' for right
+		boss->move(1); // param '1' for right
 	}
 }

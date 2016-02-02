@@ -5,6 +5,7 @@
 
 #include "GameData.h"
 #include "Bullet.h"
+#include "cocos2d.h"
 
 class GameScreen;
 

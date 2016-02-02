@@ -27,27 +27,9 @@ void Player::update()
 	{
 		setPositionX(getPosition().x + dirX * speed);
 		setPositionY(getPosition().y + dirY * speed) ;
-
-		//if (direction == 0) //check if going left
-		//{
-		//	this->setPositionX(this->getPositionX() - 5);
-		//}
-		//else if (direction == 1)
-		//{
-		//	this->setPositionX(this->getPositionX() + 5);
-		//}
-
-		//else if (direction == 2) //check if going left
-		//{
-		//	this->setPositionY(this->getPositionY() - 5);
-		//}
-
-		//else if (direction == 3)
-		//{
-		//	this->setPositionY(this->getPositionY() + 5);
-		//}
 	}
 }
+
 void Player::LoseLives(){
 	lives--;
 }
@@ -61,5 +43,3 @@ void Player::initPlayer(){
 	speed = 5.f;
 	dirX = dirY = 0;
 }
-
-
