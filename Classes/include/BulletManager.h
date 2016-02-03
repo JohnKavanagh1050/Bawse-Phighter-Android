@@ -5,6 +5,7 @@
 
 #include "GameData.h"
 #include "Bullet.h"
+#include "BossBullet.h"
 #include "cocos2d.h"
 
 class GameScreen;
@@ -13,18 +14,14 @@ class BulletManager{
 public:
 	static BulletManager* GetInstance();
 
-	//void setPlayer(Player* player);
-	//void setBoss(Boss* player);
-	//bool checkCollision();
-
 	//Return a pointer to a new bullet if ne wa created. Otherwise null.
-	void update(GameScreen* world, Bullet* &playerBullet, Bullet* &bossBullet);
-	void deleteBossBullet(GameScreen* world,  Bullet* &bossBullet);
+	void update(GameScreen* world, Bullet* &playerBullet, BossBullet* &bossBullet);
+	void deleteBossBullet(GameScreen* world,  BossBullet* &bossBullet);
 	void deletePlayerBullet(GameScreen* world, Bullet* &playerBullet);
 
 private:
 	std::list<Bullet*> currentPlayerBullets;
-	std::list<Bullet*> currentBossBullets;
+	std::list<BossBullet*> currentBossBullets;
 	const short SECOND = 60;
 	short bossCounter;
 	short playerCounter;

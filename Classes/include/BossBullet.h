@@ -4,11 +4,11 @@
 #include "GameData.h"
 #include "GameStates.h"
 
-class Bullet : public cocos2d::Sprite{
+class BossBullet : public cocos2d::Sprite{
 public:
-	static Bullet * createPlayerBullet(void);
+	static BossBullet * createBossBullet(void);
 	void initBullet();
-	void updatePlayerBullet();
+	void updateBossBullet();
 private:
 
 };

@@ -14,30 +14,10 @@ Bullet * Bullet::createPlayerBullet()
 	return NULL;
 }
 
-Bullet * Bullet::createBossBullet()
-{
-	Bullet * bossBullet = new Bullet();
-	if (bossBullet && bossBullet->initWithFile("GameScreen/enemy bullet.png"))
-	{
-		bossBullet->autorelease();
-		bossBullet->initBullet();
-		return bossBullet;
-	}
-
-	CC_SAFE_DELETE(bossBullet);
-	return NULL;
-}
-
 void Bullet::initBullet(){
 
 }
 
-void Bullet::updatePlayerBullet()
-{
+void Bullet::updatePlayerBullet(){
 	setPositionY(getPositionY() + 5);
-}
-
-void Bullet::updateBossBullet()
-{
-	setPositionY(getPositionY() - 3);
 }

@@ -47,22 +47,12 @@ bool GameScreen::init()
 	player = Player::create();
 	player->setPosition(Vec2(100, 70));
 	this->addChild(player, 5);
-	CCRect playerRect = CCRectMake(
-		player->getPosition().x - (player->getContentSize().width / 2),
-		player->getPosition().y - (player->getContentSize().height / 2),
-		player->getContentSize().width, player->getContentSize().height);
 
 	boss= Boss::create();
 	boss->setPosition(Vec2(300, 350));
 	this->addChild(boss, 5);
-	CCRect bossRect = CCRectMake(
-		boss->getPosition().x - (boss->getContentSize().width / 2),
-		boss->getPosition().y - (boss->getContentSize().height / 2),
-		boss->getContentSize().width, boss->getContentSize().height);
 
-	updateBulletManager = std::bind(
-		&BulletManager::update,
-		BulletManager::GetInstance(),
+	updateBulletManager = std::bind(&BulletManager::update, BulletManager::GetInstance(),
 		std::placeholders::_1,//this
 		std::placeholders::_2,//player bullet
 		std::placeholders::_3);//boss bullet
@@ -112,11 +102,8 @@ void GameScreen::onTouchEnded(Touch *touch, Event *event)
 void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)
 {
 	std::shared_ptr<GameData> ptr = GameData::sharedGameData();
-
-	auto backgroundSprite = Sprite::create
-		(ptr->m_backgroundTextureFile);
-	backgroundSprite->setPosition(Point((visibleSize.width / 2) +
-		origin.x, (visibleSize.height / 2) + origin.y));
+	auto backgroundSprite = Sprite::create (ptr->m_backgroundTextureFile);
+	backgroundSprite->setPosition(Point((visibleSize.width / 2) + origin.x, (visibleSize.height / 2) + origin.y));
 	this->addChild(backgroundSprite, -1);
 }
 
@@ -124,16 +111,44 @@ void GameScreen::update(float dt)
 {
 	player->update();
 	boss->update();
-
 	Bullet* playerBullet = nullptr;
-	Bullet* bossBullet = nullptr;
+	BossBullet* bossBullet = nullptr;
 	updateBulletManager(this, playerBullet, bossBullet);
+	CCRect bossBulletRect;
+	CCRect playerBulletRect;
+
+	CCRect playerRect = CCRectMake(
+		player->getPosition().x - (player->getContentSize().width / 2),
+		player->getPosition().y - (player->getContentSize().height / 2),
+		player->getContentSize().width, player->getContentSize().height);
+	CCRect bossRect = CCRectMake(
+		boss->getPosition().x - (boss->getContentSize().width / 2),
+		boss->getPosition().y - (boss->getContentSize().height / 2),
+		boss->getContentSize().width, boss->getContentSize().height);
 
 	if (bossBullet) {
 		bossBullet->setPosition(boss->getPositionX(), boss->getPositionY());
+		bossBulletRect = CCRectMake(
+			bossBullet->getPosition().x - (bossBullet->getContentSize().width / 2),
+			bossBullet->getPosition().y - (bossBullet->getContentSize().height / 2),
+			bossBullet->getContentSize().width, bossBullet->getContentSize().height);
+
+		if (playerRect.intersectsRect(bossBulletRect)){
+			auto scene = GameOver::createScene();
+			Director::getInstance()->replaceScene(scene);
+		}
 	}
 	if (playerBullet) {
 		playerBullet->setPosition(player->getPositionX(), player->getPositionY());
+		playerBulletRect = CCRectMake(
+			playerBullet->getPosition().x - (playerBullet->getContentSize().width / 2),
+			playerBullet->getPosition().y - (playerBullet->getContentSize().height / 2),
+			playerBullet->getContentSize().width, playerBullet->getContentSize().height);
+
+		if (bossRect.intersectsRect(playerBulletRect)){
+			auto scene = GameOver::createScene();
+			Director::getInstance()->replaceScene(scene);
+		}
 	}
 
 	//boss movement

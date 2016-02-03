@@ -1,6 +1,5 @@
 #include "BulletManager.h"
 
-
 bool BulletManager::instanceFlag = false;
 BulletManager* BulletManager::instance = NULL;
 
@@ -15,7 +14,7 @@ BulletManager* BulletManager::GetInstance() {
 	}
 }
 
-void BulletManager::deleteBossBullet(GameScreen* world, Bullet* &bossBullet)
+void BulletManager::deleteBossBullet(GameScreen* world, BossBullet* &bossBullet)
 {
 	world->removeChild(bossBullet);
 }
@@ -25,11 +24,10 @@ void BulletManager::deletePlayerBullet(GameScreen* world, Bullet* &playerBullet)
 	world->removeChild(playerBullet);
 }
 
-void BulletManager::update(GameScreen* world, Bullet* &playerBullet, Bullet* &bossBullet)
+void BulletManager::update(GameScreen* world, Bullet* &playerBullet, BossBullet* &bossBullet)
 {
-
 	if (bossCounter % (SECOND) == 0){
-		bossBullet = Bullet::createBossBullet();
+		bossBullet = BossBullet::createBossBullet();
 		currentBossBullets.push_back(bossBullet);
 		world->addChild(bossBullet, 5);
 		bossCounter = 0;
@@ -49,25 +47,15 @@ void BulletManager::update(GameScreen* world, Bullet* &playerBullet, Bullet* &bo
 		if (pBullet){
 			deletePlayerBullet(world, playerBullet);
 		}
-	}
+	} 
 
-	for (Bullet* f : currentBossBullets) {
+	for (BossBullet* f : currentBossBullets) {
 		f->updateBossBullet();
 		if (bBullet){
 			deleteBossBullet(world, bossBullet);
 		}
 	}
 
-	/*if (player && bossBullet) {
-		auto p_pos = player->getPosition();
-		auto b_pos = bossBullet->getPosition();
-
-		if (b_pos.x > p_pos.x && b_pos.x + 20 < p_pos.x &&
-			b_pos.y > p_pos.y && b_pos.y + 20 < p_pos.y){
-			player->LoseLives();
-
-		}
-		*/
 	playerCounter++;
 	bossCounter++;
 
