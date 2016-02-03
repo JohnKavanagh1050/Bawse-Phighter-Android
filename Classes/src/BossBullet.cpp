@@ -14,11 +14,19 @@ BossBullet * BossBullet::createBossBullet()
 	return NULL;
 }
 
+bool BossBullet::getRemove(){
+	return remove;
+}
+
 void BossBullet::initBullet(){
 
 }
 
-void BossBullet::updateBossBullet()
+void BossBullet::update()
 {
 	setPositionY(getPositionY() - 3);
+	timecounter++;
+	if (timecounter >= 600){
+		remove = true;
+	}
 }

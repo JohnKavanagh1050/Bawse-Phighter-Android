@@ -8,7 +8,12 @@ class BossBullet : public cocos2d::Sprite{
 public:
 	static BossBullet * createBossBullet(void);
 	void initBullet();
-	void updateBossBullet();
+	void update();
+	bool getRemove();
+	
 private:
-
+	int timeAlive;
+	int timecounter;
+	short const TIMETOLIVE = 60;
+	bool remove;
 };

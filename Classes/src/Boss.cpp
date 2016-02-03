@@ -20,8 +20,31 @@ void Boss::move(int directionParam)
 	moving = true;
 }
 
-void Boss::update()
+void Boss::Hit()
 {
+	hit = true;
+}
+
+void Boss::deleteBossBullet(GameScreen* world, int i)
+{
+	world->removeChild(currentBossBullets[i]);
+}
+
+void Boss::update(GameScreen* world )
+{
+	for (int i = 0; i < currentBossBullets.size(); i++){
+		currentBossBullets[i]->update();
+		if (currentBossBullets[i]->getRemove()){
+			deleteBossBullet(world, i);
+		}
+	}
+	if (bossCounter % (SECOND) == 0){
+		BossBullet *bossBullet = BossBullet::createBossBullet();
+		currentBossBullets.push_back(bossBullet);
+		world->addChild(bossBullet, 5);
+		bossCounter = 0;
+	}
+
 	if (moving) //check if moving
 	{
 		if (direction == 0) //check if going left
@@ -33,6 +56,10 @@ void Boss::update()
 			this->setPositionX(this->getPositionX() + 2);
 		}
 	}
+
+	bossCounter++;
+
+	return;
 }
 
 void Boss::idle()
@@ -41,6 +68,6 @@ void Boss::idle()
 }
 
 void Boss::initBoss(){
-	//speed = 5.f;
-	//dirX = dirY = 0;
+	lives = 100;
 }
+

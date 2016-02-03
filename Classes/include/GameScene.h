@@ -6,20 +6,17 @@
 #include "GameOverScene.h"
 #include "Player.h"
 #include "GameStates.h"
-#include "Boss.h"
-#include "BulletManager.h"
+
 #include "SimpleAudioEngine.h"  
+
+class Boss;
 
 class GameScreen : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState;
-	Player * player;
-	Boss * boss;
-	Bullet * bullet;
-	Bullet *BM;
-
-	std::function<void(GameScreen*, Bullet*&, BossBullet*&)> updateBulletManager;
+	Player* player;
+	Boss* boss;
 
 public:
 	static cocos2d::Scene* createScene();
@@ -36,3 +33,4 @@ public:
 
 	CREATE_FUNC(GameScreen);
 };
+#include "Boss.h"

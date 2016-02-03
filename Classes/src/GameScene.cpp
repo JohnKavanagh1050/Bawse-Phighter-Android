@@ -48,14 +48,9 @@ bool GameScreen::init()
 	player->setPosition(Vec2(100, 70));
 	this->addChild(player, 5);
 
-	boss= Boss::create();
+	boss = Boss::create();
 	boss->setPosition(Vec2(300, 350));
 	this->addChild(boss, 5);
-
-	updateBulletManager = std::bind(&BulletManager::update, BulletManager::GetInstance(),
-		std::placeholders::_1,//this
-		std::placeholders::_2,//player bullet
-		std::placeholders::_3);//boss bullet
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		"GameMusic.wav", true);
@@ -110,13 +105,11 @@ void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d:
 void GameScreen::update(float dt)
 {
 	player->update();
-	boss->update();
-	Bullet* playerBullet = nullptr;
-	BossBullet* bossBullet = nullptr;
-	updateBulletManager(this, playerBullet, bossBullet);
+	boss->update(this);
+
+/*	
 	CCRect bossBulletRect;
 	CCRect playerBulletRect;
-
 	CCRect playerRect = CCRectMake(
 		player->getPosition().x - (player->getContentSize().width / 2),
 		player->getPosition().y - (player->getContentSize().height / 2),
@@ -134,8 +127,7 @@ void GameScreen::update(float dt)
 			bossBullet->getContentSize().width, bossBullet->getContentSize().height);
 
 		if (playerRect.intersectsRect(bossBulletRect)){
-			auto scene = GameOver::createScene();
-			Director::getInstance()->replaceScene(scene);
+
 		}
 	}
 	if (playerBullet) {
@@ -146,10 +138,9 @@ void GameScreen::update(float dt)
 			playerBullet->getContentSize().width, playerBullet->getContentSize().height);
 
 		if (bossRect.intersectsRect(playerBulletRect)){
-			auto scene = GameOver::createScene();
-			Director::getInstance()->replaceScene(scene);
+		//	boss->Hit();
 		}
-	}
+	}*/
 
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())

@@ -56,9 +56,6 @@
     <ClInclude Include="..\Classes\include\Boss.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\include\BulletManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\include\UpgradeScene.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -98,9 +95,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\src\Boss.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\src\BulletManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\src\UpgradeScene.cpp">

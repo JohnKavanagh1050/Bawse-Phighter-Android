@@ -50,7 +50,7 @@ void BulletManager::update(GameScreen* world, Bullet* &playerBullet, BossBullet*
 	} 
 
 	for (BossBullet* f : currentBossBullets) {
-		f->updateBossBullet();
+		f->update();
 		if (bBullet){
 			deleteBossBullet(world, bossBullet);
 		}
