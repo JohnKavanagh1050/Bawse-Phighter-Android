@@ -10,6 +10,8 @@ public:
 	void initBullet();
 	void update();
 	bool getRemove();
+
+
 	
 private:
 	int timeAlive;

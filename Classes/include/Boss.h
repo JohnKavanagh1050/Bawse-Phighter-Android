@@ -5,6 +5,7 @@
 #include "GameStates.h"
 #include "BossBullet.h"
 #include "GameScene.h"
+#include "Player.h"
 
 class Boss : public cocos2d::Sprite{
 public:
@@ -23,7 +24,7 @@ private:
 	bool moving;
 	bool hit;
 	short bossCounter;
+	Player* player;
 
 	std::vector<BossBullet*> currentBossBullets;
-
 };

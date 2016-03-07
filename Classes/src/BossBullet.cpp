@@ -19,14 +19,15 @@ bool BossBullet::getRemove(){
 }
 
 void BossBullet::initBullet(){
-
+	timecounter = timeAlive = 0;
+	remove = false;
 }
 
 void BossBullet::update()
 {
-	setPositionY(getPositionY() - 3);
+	setPositionY(getPositionY()-3);
 	timecounter++;
-	if (timecounter >= 600){
+	if (timecounter >= 1000){
 		remove = true;
 	}
 }

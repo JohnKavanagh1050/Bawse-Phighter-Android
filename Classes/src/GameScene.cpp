@@ -107,6 +107,7 @@ void GameScreen::update(float dt)
 	player->update();
 	boss->update(this);
 
+	
 /*	
 	CCRect bossBulletRect;
 	CCRect playerBulletRect;

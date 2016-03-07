@@ -30,17 +30,19 @@ void Boss::deleteBossBullet(GameScreen* world, int i)
 	world->removeChild(currentBossBullets[i]);
 }
 
-void Boss::update(GameScreen* world )
+void Boss::update(GameScreen* world)
 {
 	for (int i = 0; i < currentBossBullets.size(); i++){
 		currentBossBullets[i]->update();
 		if (currentBossBullets[i]->getRemove()){
 			deleteBossBullet(world, i);
+			currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 		}
 	}
 	if (bossCounter % (SECOND) == 0){
 		BossBullet *bossBullet = BossBullet::createBossBullet();
 		currentBossBullets.push_back(bossBullet);
+		bossBullet->setPosition(getPosition().x, getPosition().y);
 		world->addChild(bossBullet, 5);
 		bossCounter = 0;
 	}
