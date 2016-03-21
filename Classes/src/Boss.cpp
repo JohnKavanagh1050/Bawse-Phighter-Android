@@ -20,10 +20,10 @@ void Boss::move(int directionParam)
 	moving = true;
 }
 
-void Boss::Hit()
+/*void Boss::Hit()
 {
 	hit = true;
-}
+}*/
 
 void Boss::deleteBossBullet(GameScreen* world, int i)
 {

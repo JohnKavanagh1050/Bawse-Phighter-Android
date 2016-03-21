@@ -9,6 +9,10 @@ public:
 	static Bullet * createPlayerBullet(void);
 	void initBullet();
 	void updatePlayerBullet();
+	bool getRemove();
 private:
-
+	int timeAlive;
+	int timecounter;
+	short const TIMETOLIVE = 60;
+	bool remove;
 };

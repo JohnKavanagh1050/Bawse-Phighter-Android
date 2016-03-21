@@ -24,7 +24,7 @@ private:
 	bool moving;
 	bool hit;
 	short bossCounter;
-	Player* player;
+//	Player* player;
 
 	std::vector<BossBullet*> currentBossBullets;
 };

@@ -104,10 +104,8 @@ void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d:
 
 void GameScreen::update(float dt)
 {
-	player->update();
+	player->update(this);
 	boss->update(this);
-
-	
 /*	
 	CCRect bossBulletRect;
 	CCRect playerBulletRect;

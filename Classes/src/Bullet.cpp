@@ -14,10 +14,20 @@ Bullet * Bullet::createPlayerBullet()
 	return NULL;
 }
 
-void Bullet::initBullet(){
+bool Bullet::getRemove(){
+	return remove;
+}
 
+void Bullet::initBullet(){
+	timecounter = timeAlive = 0;
+	remove = false;
 }
 
 void Bullet::updatePlayerBullet(){
 	setPositionY(getPositionY() + 5);
+
+	timecounter++;
+	if (timecounter >= 1000){
+		remove = true;
+	}
 }

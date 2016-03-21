@@ -4,13 +4,12 @@
 #include "PauseScene.h"
 #include "GameData.h"
 #include "GameOverScene.h"
-#include "Player.h"
 #include "GameStates.h"
 
 #include "SimpleAudioEngine.h"  
 
 class Boss;
-
+class Player;
 class GameScreen : public cocos2d::Layer
 {
 private:
@@ -34,3 +33,4 @@ public:
 	CREATE_FUNC(GameScreen);
 };
 #include "Boss.h"
+#include "Player.h"
