@@ -21,14 +21,19 @@ void Player::move(float x ,float y)
 	moving = true;
 }
 
-void Boss::Hit()
+/*bool Player::Hit()
 {
 	hit = true;
+}*/
+
+float Player::getLives(){
+	return lives;
 }
 
 void Player::deletePlayerBullet(GameScreen* world, int i)
 {
 	world->removeChild(currentPlayerBullets[i]);
+	currentPlayerBullets.erase(std::remove(currentPlayerBullets.begin(), currentPlayerBullets.end(), currentPlayerBullets[i]));
 }
 
 std::vector<Bullet*> Player::getBullets()
@@ -42,7 +47,6 @@ void Player::update(GameScreen* world)
 		currentPlayerBullets[i]->updatePlayerBullet();
 		if (currentPlayerBullets[i]->getRemove()){
 			deletePlayerBullet(world, i);
-			currentPlayerBullets.erase(std::remove(currentPlayerBullets.begin(), currentPlayerBullets.end(), currentPlayerBullets[i]));
 		}
 	}
 	if (counter % (SECOND) == 0){
@@ -50,6 +54,7 @@ void Player::update(GameScreen* world)
 		currentPlayerBullets.push_back(playerBullet);
 		playerBullet->setPosition(getPosition().x, getPosition().y);
 		world->addChild(playerBullet, 5);
+		
 		counter = 0;
 	}
 
@@ -61,7 +66,7 @@ void Player::update(GameScreen* world)
 	counter++;
 }
 
-void Player::LoseLives(){
+void Player::loseLives(){
 	lives--;
 }
 

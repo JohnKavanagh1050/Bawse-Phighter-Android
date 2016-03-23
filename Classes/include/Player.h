@@ -12,12 +12,15 @@ public:
 
 	void move(float x, float y);
 	void update(GameScreen* world);
-	std::vector<Bullet*> getBullets();
 	void Boundaries();
 	void idle();
-	void LoseLives();
+	void loseLives();
 	void deletePlayerBullet(GameScreen* world, int i);
 
+	bool Hit();
+	float getLives();
+
+	std::vector<Bullet*> getBullets();
 private:
 	void initPlayer();
 

@@ -132,19 +132,26 @@ void GameScreen::update(float dt)
 			currentPlayerBullets[i]->getPosition().y - (currentPlayerBullets[i]->getContentSize().height / 2),
 			currentPlayerBullets[i]->getContentSize().width, currentPlayerBullets[i]->getContentSize().height);
 		if (bossRect.intersectsRect(playerBulletRect)){
-
+			player->deletePlayerBullet(this, i);
+			boss->loseLives();
+			if (boss->getLives() <= 0){
+				activateMainMenuScene(this);
+			}
 		}
 	}
 
 	for (int i = 0; i < currentBossBullets.size(); i++){
 		bossBulletRect = CCRectMake(currentBossBullets[i]->getPosition().x - (currentBossBullets[i]->getContentSize().width / 2),
 			currentBossBullets[i]->getPosition().y - (currentBossBullets[i]->getContentSize().height / 2),
-			currentBossBullets[i]->getContentSize().width, currentBossBullets[i]->getContentSize().height);	
+			currentBossBullets[i]->getContentSize().width, currentBossBullets[i]->getContentSize().height);
 		if (playerRect.intersectsRect(bossBulletRect)){
-			activateMainMenuScene(this);
+			boss->deleteBossBullet(this, i);
+			player->loseLives();
+			if (player->getLives() <= 0){
+				activateMainMenuScene(this);
+			}
 		}
 	}
-	
 	
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())

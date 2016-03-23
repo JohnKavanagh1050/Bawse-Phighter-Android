@@ -51,17 +51,17 @@ bool MainMenu::init()
 void MainMenu::activateGameScene(Ref * pSender)
 {
 	auto scene = GameScreen::createScene();
-	Director::getInstance()->replaceScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
-		"MenuMusic.wav");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"GameMusic.wav", true);
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 }
 
 void MainMenu::activateUpgradeScene(Ref * pSender)
 {
 	auto scene = UpgradeMenu::createScene();
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->replaceScene(TransitionFlipX::create(1, scene)); 
+	//Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	//Director::getInstance()->replaceScene(TransitionSlideInT::create(1, scene));
 }
 
 void MainMenu::exitGame(Ref* pSender)

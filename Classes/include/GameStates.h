@@ -9,3 +9,5 @@ enum class GameStates
 };
 
 #endif
+
+// :)

@@ -12,13 +12,17 @@ public:
 	static Boss * create(void);
 	void initBoss();
 	void move(int directionParam);
-	std::vector<BossBullet*> getBullets();
 	void update(GameScreen* world);
 	void idle();
-	void Hit();
 	void Defeated();
 	void deleteBossBullet(GameScreen* world, int i);
+	void loseLives();
 
+	bool Hit();
+
+	float getLives();
+
+	std::vector<BossBullet*> getBullets();
 private:
 	const short SECOND = 60;
 	int direction, lives;

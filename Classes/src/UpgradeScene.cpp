@@ -42,5 +42,5 @@ bool UpgradeMenu::init()
 void UpgradeMenu::activateMainMenuScene(cocos2d::Ref *pSender)
 {
 	auto scene = MainMenu::createScene();
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->replaceScene(TransitionFlipX::create(1, scene));
 }
