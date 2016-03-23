@@ -25,6 +25,11 @@ void Boss::move(int directionParam)
 	hit = true;
 }*/
 
+std::vector<BossBullet*> Boss::getBullets()
+{
+	return currentBossBullets;
+}
+
 void Boss::deleteBossBullet(GameScreen* world, int i)
 {
 	world->removeChild(currentBossBullets[i]);
@@ -72,4 +77,3 @@ void Boss::idle()
 void Boss::initBoss(){
 	lives = 100;
 }
-

@@ -12,6 +12,7 @@ public:
 	static Boss * create(void);
 	void initBoss();
 	void move(int directionParam);
+	std::vector<BossBullet*> getBullets();
 	void update(GameScreen* world);
 	void idle();
 	void Hit();

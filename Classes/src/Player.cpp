@@ -31,8 +31,13 @@ void Player::deletePlayerBullet(GameScreen* world, int i)
 	world->removeChild(currentPlayerBullets[i]);
 }
 
-void Player::update(GameScreen* world)
+std::vector<Bullet*> Player::getBullets()
 {
+	return currentPlayerBullets;
+}
+
+void Player::update(GameScreen* world)
+{	
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		currentPlayerBullets[i]->updatePlayerBullet();
 		if (currentPlayerBullets[i]->getRemove()){

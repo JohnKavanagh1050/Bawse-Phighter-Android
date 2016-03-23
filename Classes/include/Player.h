@@ -12,6 +12,7 @@ public:
 
 	void move(float x, float y);
 	void update(GameScreen* world);
+	std::vector<Bullet*> getBullets();
 	void Boundaries();
 	void idle();
 	void LoseLives();

@@ -5,8 +5,12 @@
 #include "GameData.h"
 #include "GameOverScene.h"
 #include "GameStates.h"
+#include "Bullet.h"
+#include "BossBullet.h"
 
 #include "SimpleAudioEngine.h"  
+
+#include <iostream>
 
 class Boss;
 class Player;
@@ -17,6 +21,9 @@ private:
 	Player* player;
 	Boss* boss;
 
+	std::vector<Bullet*> currentPlayerBullets;
+	std::vector<BossBullet*> currentBossBullets;
+
 public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
@@ -24,6 +31,8 @@ public:
 	void activatePauseScene(Ref *pSender);
 	// Called at game over 
 	void activateGameOverScene(Ref *pSender);
+	//call menu
+	void activateMainMenuScene(Ref *pSender);
 	void addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin);
 	void update(float dt);
 

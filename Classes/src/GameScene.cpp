@@ -67,6 +67,12 @@ void GameScreen::activatePauseScene(Ref *pSender)
 		"GameMusic.wav");
 }
 
+void GameScreen::activateMainMenuScene(cocos2d::Ref *pSender)
+{
+	auto scene = MainMenu::createScene();
+	Director::getInstance()->replaceScene(scene);
+}
+
 void GameScreen::activateGameOverScene(Ref *pSender)
 {
 	auto scene = GameOver::createScene();
@@ -97,18 +103,22 @@ void GameScreen::onTouchEnded(Touch *touch, Event *event)
 void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)
 {
 	std::shared_ptr<GameData> ptr = GameData::sharedGameData();
-	auto backgroundSprite = Sprite::create (ptr->m_backgroundTextureFile);
+	auto backgroundSprite = Sprite::create(ptr->m_backgroundTextureFile);
 	backgroundSprite->setPosition(Point((visibleSize.width / 2) + origin.x, (visibleSize.height / 2) + origin.y));
 	this->addChild(backgroundSprite, -1);
 }
 
 void GameScreen::update(float dt)
 {
+	//updates all enemy and player logic
 	player->update(this);
 	boss->update(this);
-/*	
-	CCRect bossBulletRect;
+
+	currentPlayerBullets = player->getBullets();
+	currentBossBullets = boss->getBullets();
+	//handles collisions
 	CCRect playerBulletRect;
+	CCRect bossBulletRect;
 	CCRect playerRect = CCRectMake(
 		player->getPosition().x - (player->getContentSize().width / 2),
 		player->getPosition().y - (player->getContentSize().height / 2),
@@ -117,30 +127,25 @@ void GameScreen::update(float dt)
 		boss->getPosition().x - (boss->getContentSize().width / 2),
 		boss->getPosition().y - (boss->getContentSize().height / 2),
 		boss->getContentSize().width, boss->getContentSize().height);
-
-	if (bossBullet) {
-		bossBullet->setPosition(boss->getPositionX(), boss->getPositionY());
-		bossBulletRect = CCRectMake(
-			bossBullet->getPosition().x - (bossBullet->getContentSize().width / 2),
-			bossBullet->getPosition().y - (bossBullet->getContentSize().height / 2),
-			bossBullet->getContentSize().width, bossBullet->getContentSize().height);
-
-		if (playerRect.intersectsRect(bossBulletRect)){
+	for (int i = 0; i < currentPlayerBullets.size(); i++){
+		playerBulletRect = CCRectMake(currentPlayerBullets[i]->getPosition().x - (currentPlayerBullets[i]->getContentSize().width / 2),
+			currentPlayerBullets[i]->getPosition().y - (currentPlayerBullets[i]->getContentSize().height / 2),
+			currentPlayerBullets[i]->getContentSize().width, currentPlayerBullets[i]->getContentSize().height);
+		if (bossRect.intersectsRect(playerBulletRect)){
 
 		}
 	}
-	if (playerBullet) {
-		playerBullet->setPosition(player->getPositionX(), player->getPositionY());
-		playerBulletRect = CCRectMake(
-			playerBullet->getPosition().x - (playerBullet->getContentSize().width / 2),
-			playerBullet->getPosition().y - (playerBullet->getContentSize().height / 2),
-			playerBullet->getContentSize().width, playerBullet->getContentSize().height);
 
-		if (bossRect.intersectsRect(playerBulletRect)){
-		//	boss->Hit();
+	for (int i = 0; i < currentBossBullets.size(); i++){
+		bossBulletRect = CCRectMake(currentBossBullets[i]->getPosition().x - (currentBossBullets[i]->getContentSize().width / 2),
+			currentBossBullets[i]->getPosition().y - (currentBossBullets[i]->getContentSize().height / 2),
+			currentBossBullets[i]->getContentSize().width, currentBossBullets[i]->getContentSize().height);	
+		if (playerRect.intersectsRect(bossBulletRect)){
+			activateMainMenuScene(this);
 		}
-	}*/
-
+	}
+	
+	
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{

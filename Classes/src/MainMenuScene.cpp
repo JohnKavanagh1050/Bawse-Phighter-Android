@@ -42,7 +42,6 @@ bool MainMenu::init()
 	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
 	this->addChild(menu);
 
-	
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		"MenuMusic.wav", true);
 
