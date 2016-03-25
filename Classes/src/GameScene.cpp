@@ -116,7 +116,7 @@ void GameScreen::update(float dt)
 
 	currentPlayerBullets = player->getBullets();
 	currentBossBullets = boss->getBullets();
-	//handles collisions
+	//handles collisions with rectangles in cocos
 	CCRect playerBulletRect;
 	CCRect bossBulletRect;
 	CCRect playerRect = CCRectMake(

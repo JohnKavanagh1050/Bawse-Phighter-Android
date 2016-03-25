@@ -29,7 +29,7 @@ public:
 	virtual bool init();
 	// Called when user pauses gameplay.
 	void activatePauseScene(Ref *pSender);
-	// Called at game over 
+	// Called at game over
 	void activateGameOverScene(Ref *pSender);
 	//call menu
 	void activateMainMenuScene(Ref *pSender);
