@@ -29,7 +29,7 @@ bool Level2::init()
 	Point origin = Director::getInstance()->getVisibleOrigin();
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 
-	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 2", "fonts\Ninja Penguin.ttf", 30,
+	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 2", "Ninja Penguin.ttf", 30,
 		CCSizeMake(245, 32), kCCTextAlignmentCenter);
 	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
 	ttf1->setColor(Color3B(0, 0, 0));

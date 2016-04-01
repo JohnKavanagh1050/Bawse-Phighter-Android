@@ -17,7 +17,6 @@ class Level2 : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState;
-
 	//HealthBar* healthBar;
 
 	std::vector<Bullet*> currentPlayerBullets;

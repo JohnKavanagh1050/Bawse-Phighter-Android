@@ -57,7 +57,7 @@ bool Level1::init()
 //	healthBar->setPosition(Vec2(150, 120));
 //	this->addChild(healthBar, 5);
 
-	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "fonts\Ninja Penguin.ttf", 30,
+	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "Ninja Penguin.ttf", 30,
 		CCSizeMake(245, 32), kCCTextAlignmentCenter);
 	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
 	ttf1->setColor(Color3B(0,0,0));
@@ -92,6 +92,12 @@ void Level1::activateGameOverScene(Ref *pSender)
 		"GameMusic.wav");
 }
 
+void Level1::activateGameScene2(Ref * pSender)
+{
+	auto scene = Level2::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+}
+
 bool Level1::onTouchBegan(Touch *touch, Event *event)
 {
 	//get location of my touch event for player movement
@@ -119,13 +125,6 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 	this->addChild(backgroundSprite, -1);
 }
 
-void Level1::activateGameScene2(Ref * pSender)
-{
-	auto scene = Level2::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
-}
 
 void Level1::update(float dt)
 {

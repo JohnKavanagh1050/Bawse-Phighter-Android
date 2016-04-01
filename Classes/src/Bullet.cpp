@@ -1,32 +1,36 @@
 #include "Bullet.h"
 
+USING_NS_CC;
+
 Bullet * Bullet::createPlayerBullet()
 {
 	Bullet * playerBullet = new Bullet();
 
-	if (playerBullet && playerBullet->initWithFile("GameScreen/bullet.png"))
+	if (playerBullet && playerBullet->initWithFile("GameScreen/ninja_star.png"))
 	{
+		
+		//Create and run animation
+		Vector<SpriteFrame*> animFrames(3);
+		char str[100] = { 0 };
+		for (int i = 0; i < 3; i++)
+		{
+			sprintf(str, "GameScreen/ninja_star.png", i);
+			auto frame = SpriteFrame::create(str, Rect(0, 0, 30, 30)); //we assume that the sprites' dimentions are 30x30 rectangles.
+			animFrames.pushBack(frame);
+		}
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animate = Animate::create(animation);
+
+		playerBullet->runAction(animate);
 		playerBullet->initBullet();
+
 		return playerBullet;
 	}
 }
 
 void Bullet::animateBullet()
 {
-	/*std::vector<SpriteFrame*> animFrames;
-	animFrames.reserve(12);
-	animFrames.pushBack(SpriteFrame::create(GameScreen / bullet.png, Rect(0, 0, 65, 81)));
-	animFrames.pushBack(SpriteFrame::create("Blue_Front2.png", Rect(0, 0, 65, 81)));
-	animFrames.pushBack(SpriteFrame::create("Blue_Front3.png", Rect(0, 0, 65, 81)));
-	animFrames.pushBack(SpriteFrame::create("Blue_Left1.png", Rect(0, 0, 65, 81)));
-
-
-	// create the animation out of the frames
-	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
-	Animate* animate = Animate::create(animation);
-
-	// run it and repeat it forever
-	mySprite->runAction(RepeatForever::create(animate));*/
+	
 }
 
 bool Bullet::getRemove(){
