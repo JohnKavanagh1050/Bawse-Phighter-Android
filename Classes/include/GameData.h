@@ -25,20 +25,6 @@ public:
 	std::string m_backgroundTextureFile;
 	std::string m_textureAtlasImageFile;
 	std::string m_textureAtlasPlistFile;
-	// Tower base and tower related fields.
-	std::string m_towerBaseFile;
-	std::string m_towerGunFile;
-	int m_towerWidth;
-	int m_towerHeight;
-	int m_firingDelay;
-	int m_towerRotationSpeed;
-	float m_towerRotationOriginX;
-	float m_towerRotationOriginY;
-	int m_numberOfTowerBases;
-
-	float m_towerBaseX[3];
-	float m_towerBaseY[3];
-
 
 };
 

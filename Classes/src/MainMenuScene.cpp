@@ -50,11 +50,19 @@ bool MainMenu::init()
 
 void MainMenu::activateGameScene(Ref * pSender)
 {
-	auto scene = GameScreen::createScene();
+	auto scene = Level1::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 }
+
+/*void MainMenu::activateGameScene2(Ref * pSender)
+{
+	auto scene = GameScreen2::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
+}*/
 
 void MainMenu::activateUpgradeScene(Ref * pSender)
 {

@@ -62,6 +62,10 @@
     <ClInclude Include="..\Classes\include\BossBullet.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\include\HealthBar.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\GameScene2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp">
@@ -103,5 +107,9 @@
     <ClCompile Include="..\Classes\src\BossBullet.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\src\HealthBar.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\GaneScene2.cpp" />
   </ItemGroup>
 </Project>

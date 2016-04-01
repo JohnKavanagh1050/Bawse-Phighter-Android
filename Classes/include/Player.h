@@ -11,11 +11,11 @@ public:
 	static Player * create(void);
 
 	void move(float x, float y);
-	void update(GameScreen* world);
+	void update(Level1* world);
 	void Boundaries();
 	void idle();
 	void loseLives();
-	void deletePlayerBullet(GameScreen* world, int i);
+	void deletePlayerBullet(Level1* world, int i);
 
 	bool Hit();
 	float getLives();
@@ -26,7 +26,7 @@ private:
 
 	float dirX, dirY;
 	float speed;
-	float lives = 100;
+	float lives = 10;
 
 	bool moving;
 	bool hit;

@@ -12,10 +12,10 @@ public:
 	static Boss * create(void);
 	void initBoss();
 	void move(int directionParam);
-	void update(GameScreen* world);
+	void update(Level1* world);
 	void idle();
 	void Defeated();
-	void deleteBossBullet(GameScreen* world, int i);
+	void deleteBossBullet(Level1* world, int i);
 	void loseLives();
 
 	bool Hit();

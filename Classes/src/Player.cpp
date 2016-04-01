@@ -5,13 +5,9 @@ Player * Player::create()
 	Player * player = new Player();
 	if (player && player->initWithFile("GameScreen/player.png"))
 	{
-		player->autorelease();
 		player->initPlayer();
 		return player;
 	}
-
-	CC_SAFE_DELETE(player);
-	return NULL;
 }
 
 void Player::move(float x ,float y)
@@ -30,7 +26,7 @@ float Player::getLives(){
 	return lives;
 }
 
-void Player::deletePlayerBullet(GameScreen* world, int i)
+void Player::deletePlayerBullet(Level1* world, int i)
 {
 	world->removeChild(currentPlayerBullets[i]);
 	currentPlayerBullets.erase(std::remove(currentPlayerBullets.begin(), currentPlayerBullets.end(), currentPlayerBullets[i]));
@@ -41,7 +37,7 @@ std::vector<Bullet*> Player::getBullets()
 	return currentPlayerBullets;
 }
 
-void Player::update(GameScreen* world)
+void Player::update(Level1* world)
 {	
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		currentPlayerBullets[i]->updatePlayerBullet();

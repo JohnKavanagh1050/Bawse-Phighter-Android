@@ -1,25 +1,25 @@
-#include "GameScene.h"
+/*#include "GameScene2.h"
 
 USING_NS_CC;
 
-Scene* Level1::createScene()
+Scene* GameScreen::createScene()
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
-	auto layer = Level1::create();
+	auto layer = GameScreen::create();
 
 	scene->addChild(layer);
 
 	return scene;
 }
 
-bool Level1::init()
+bool GameScreen::init()
 {
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
 
-	listener->onTouchBegan = CC_CALLBACK_2(Level1::onTouchBegan, this);
-	listener->onTouchEnded = CC_CALLBACK_2(Level1::onTouchEnded, this);
+	listener->onTouchBegan = CC_CALLBACK_2(GameScreen::onTouchBegan, this);
+	listener->onTouchEnded = CC_CALLBACK_2(GameScreen::onTouchEnded, this);
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
@@ -28,7 +28,7 @@ bool Level1::init()
 	auto pauseItem =
 		MenuItemImage::create("GameScreen/Pause_Button.png",
 		"GameScreen/Pause_Button(Click).png",
-		CC_CALLBACK_1(Level1::activatePauseScene, this));
+		CC_CALLBACK_1(GameScreen::activatePauseScene, this));
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
@@ -52,9 +52,9 @@ bool Level1::init()
 	boss->setPosition(Vec2(300, 350));
 	this->addChild(boss, 5);
 
-//	healthBar = HealthBar::create();
-//	healthBar->setPosition(Vec2(150, 120));
-//	this->addChild(healthBar, 5);
+	//	healthBar = HealthBar::create();
+	//	healthBar->setPosition(Vec2(150, 120));
+	//	this->addChild(healthBar, 5);
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		"GameMusic.wav", true);
@@ -62,7 +62,7 @@ bool Level1::init()
 	return true;
 }
 
-void Level1::activatePauseScene(Ref *pSender)
+void GameScreen::activatePauseScene(Ref *pSender)
 {
 	//auto scene = PauseMenu::createScene();
 	auto scene = GameOver::createScene();
@@ -71,13 +71,13 @@ void Level1::activatePauseScene(Ref *pSender)
 		"GameMusic.wav");
 }
 
-void Level1::activateMainMenuScene(cocos2d::Ref *pSender)
+void GameScreen::activateMainMenuScene(cocos2d::Ref *pSender)
 {
 	auto scene = MainMenu::createScene();
 	Director::getInstance()->replaceScene(scene);
 }
 
-void Level1::activateGameOverScene(Ref *pSender)
+void GameScreen::activateGameOverScene(Ref *pSender)
 {
 	auto scene = GameOver::createScene();
 	Director::getInstance()->replaceScene(scene);
@@ -85,7 +85,7 @@ void Level1::activateGameOverScene(Ref *pSender)
 		"GameMusic.wav");
 }
 
-bool Level1::onTouchBegan(Touch *touch, Event *event)
+bool GameScreen::onTouchBegan(Touch *touch, Event *event)
 {
 	//get location of my touch event for player movement
 	float x = touch->getLocation().x - player->getPosition().x;
@@ -99,12 +99,12 @@ bool Level1::onTouchBegan(Touch *touch, Event *event)
 	return true;
 }
 
-void Level1::onTouchEnded(Touch *touch, Event *event)
+void GameScreen::onTouchEnded(Touch *touch, Event *event)
 {
 	player->idle();
 }
 
-void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)
+void GameScreen::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)
 {
 	std::shared_ptr<GameData> ptr = GameData::sharedGameData();
 	auto backgroundSprite = Sprite::create(ptr->m_backgroundTextureFile);
@@ -112,7 +112,7 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 	this->addChild(backgroundSprite, -1);
 }
 
-void Level1::update(float dt)
+void GameScreen::update(float dt)
 {
 	//updates all enemy and player logic
 	player->update(this);
@@ -152,11 +152,11 @@ void Level1::update(float dt)
 			boss->deleteBossBullet(this, i);
 			player->loseLives();
 			if (player->getLives() <= 0){
-				activateMainMenuScene(this); 
+				activateMainMenuScene(this);
 			}
 		}
 	}
-	
+
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{
@@ -169,3 +169,4 @@ void Level1::update(float dt)
 
 	//healthBar->setPosition(player->getPosition().x + 50, player->getPosition().y + 50);
 }
+*/

@@ -30,13 +30,13 @@ std::vector<BossBullet*> Boss::getBullets()
 	return currentBossBullets;
 }
 
-void Boss::deleteBossBullet(GameScreen* world, int i)
+void Boss::deleteBossBullet(Level1* world, int i)
 {
 	world->removeChild(currentBossBullets[i]);
 	currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 }
 
-void Boss::update(GameScreen* world)
+void Boss::update(Level1* world)
 {
 	for (int i = 0; i < currentBossBullets.size(); i++){
 		currentBossBullets[i]->update();

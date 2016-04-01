@@ -38,7 +38,7 @@ bool GameOver::init()
 
 void GameOver::activateGameScene(cocos2d::Ref *pSender)
 {
-	auto scene = GameScreen::createScene();
+	auto scene = Level1::createScene();
 	Director::getInstance()->replaceScene(scene);
 }
 

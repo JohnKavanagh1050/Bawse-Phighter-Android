@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "cocos2d.h"
 #include "PauseScene.h"
@@ -14,7 +14,7 @@
 #include <iostream>
 class Boss;
 class Player;
-class Level1 : public cocos2d::Layer
+class GameScreen : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState;
@@ -40,7 +40,7 @@ public:
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
 
-	CREATE_FUNC(Level1);
+	CREATE_FUNC(GameScreen);
 };
 #include "Boss.h"
-#include "Player.h"
+#include "Player.h"*/

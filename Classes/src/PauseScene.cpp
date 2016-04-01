@@ -51,7 +51,7 @@ void PauseMenu::activateMainMenuScene(Ref *pSender)
 
 void PauseMenu::retry(Ref *pSender)
 {
-	auto scene = GameScreen::createScene();
+	auto scene = Level1::createScene();
 	Director::getInstance()->popScene();
 	Director::getInstance()->replaceScene(scene);
 }

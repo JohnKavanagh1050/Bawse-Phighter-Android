@@ -166,7 +166,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\include\GameData.h" />
     <ClInclude Include="..\Classes\include\GameOverScene.h" />
     <ClInclude Include="..\Classes\include\GameScene.h" />
+    <ClInclude Include="..\Classes\include\GameScene2.h" />
     <ClInclude Include="..\Classes\include\GameStates.h" />
+    <ClInclude Include="..\Classes\include\HealthBar.h" />
     <ClInclude Include="..\Classes\include\LevelLoader.h" />
     <ClInclude Include="..\Classes\include\main.h" />
     <ClInclude Include="..\Classes\include\MainMenuScene.h" />
@@ -183,6 +185,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\src\GameData.cpp" />
     <ClCompile Include="..\Classes\src\GameOverScene.cpp" />
     <ClCompile Include="..\Classes\src\GameScene.cpp" />
+    <ClCompile Include="..\Classes\src\GaneScene2.cpp" />
+    <ClCompile Include="..\Classes\src\HealthBar.cpp" />
     <ClCompile Include="..\Classes\src\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\src\main.cpp" />
     <ClCompile Include="..\Classes\src\MainMenuScene.cpp" />
