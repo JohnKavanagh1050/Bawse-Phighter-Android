@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "GameOverScene.h"
 #include "GameStates.h"
+#include "GameScene2.h"
 #include "Bullet.h"
 #include "BossBullet.h"
 #include "HealthBar.h"
@@ -34,6 +35,7 @@ public:
 	void activateGameOverScene(Ref *pSender);
 	//call menu
 	void activateMainMenuScene(Ref *pSender);
+	void activateGameScene2(Ref * pSender);
 	void addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin);
 	void update(float dt);
 

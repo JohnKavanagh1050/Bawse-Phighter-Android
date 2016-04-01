@@ -32,6 +32,7 @@ bool Level1::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Point origin = Director::getInstance()->getVisibleOrigin();
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
 
 	pauseItem->setPosition(Point(pauseItem->getContentSize().width -
 		(pauseItem->getContentSize().width / 4) + origin.x,
@@ -55,6 +56,12 @@ bool Level1::init()
 //	healthBar = HealthBar::create();
 //	healthBar->setPosition(Vec2(150, 120));
 //	this->addChild(healthBar, 5);
+
+	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "fonts\Ninja Penguin.ttf", 30,
+		CCSizeMake(245, 32), kCCTextAlignmentCenter);
+	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
+	ttf1->setColor(Color3B(0,0,0));
+	this->addChild(ttf1, 4);
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		"GameMusic.wav", true);
@@ -112,6 +119,14 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 	this->addChild(backgroundSprite, -1);
 }
 
+void Level1::activateGameScene2(Ref * pSender)
+{
+	auto scene = Level2::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
+}
+
 void Level1::update(float dt)
 {
 	//updates all enemy and player logic
@@ -139,7 +154,7 @@ void Level1::update(float dt)
 			player->deletePlayerBullet(this, i);
 			boss->loseLives();
 			if (boss->getLives() <= 0){
-				activateGameOverScene(this);
+				activateGameScene2(this);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #include "cocos2d.h"
 #include "PauseScene.h"
@@ -12,14 +12,12 @@
 #include "SimpleAudioEngine.h"  
 
 #include <iostream>
-class Boss;
-class Player;
-class GameScreen : public cocos2d::Layer
+
+class Level2 : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState;
-	Player* player;
-	Boss* boss;
+
 	//HealthBar* healthBar;
 
 	std::vector<Bullet*> currentPlayerBullets;
@@ -40,7 +38,5 @@ public:
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
 
-	CREATE_FUNC(GameScreen);
+	CREATE_FUNC(Level2);
 };
-#include "Boss.h"
-#include "Player.h"*/
