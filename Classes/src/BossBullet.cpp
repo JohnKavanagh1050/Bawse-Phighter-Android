@@ -1,10 +1,26 @@
 #include "BossBullet.h"
 
+USING_NS_CC;
+
 BossBullet * BossBullet::createBossBullet()
 {
 	BossBullet * bossBullet = new BossBullet();
-	if (bossBullet && bossBullet->initWithFile("GameScreen/enemy bullet.png"))
+	if (bossBullet && bossBullet->initWithFile("GameScreen/ss_boss1_attack.png"))
 	{
+		//Create and run animation
+		Vector<SpriteFrame*> animFrames(5);
+		char str[100] = { 0 };
+		for (int i = 0; i < 5; i++)
+		{
+			sprintf(str, "GameScreen/ss_boss1_attack.png", i);
+			auto frame = SpriteFrame::create(str, Rect(36 * i, 0, 36, 36)); //we assume that the sprites' dimentions are 30x30 rectangles.
+			animFrames.pushBack(frame);
+		}
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animate = Animate::create(animation);
+
+		bossBullet->runAction(animate);
+
 		bossBullet->autorelease();
 		bossBullet->initBullet();
 		return bossBullet;
