@@ -32,4 +32,6 @@ private:
 //	Player* player;
 
 	std::vector<BossBullet*> currentBossBullets;
+
+	//CCProgressTimer *healthBar;
 };

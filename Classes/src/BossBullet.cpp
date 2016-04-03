@@ -5,7 +5,7 @@ USING_NS_CC;
 BossBullet * BossBullet::createBossBullet()
 {
 	BossBullet * bossBullet = new BossBullet();
-	if (bossBullet && bossBullet->initWithFile("GameScreen/ss_boss1_attack.png"))
+	if (bossBullet && bossBullet->initWithFile("GameScreen/ss_boss1_attack.png", Rect(0, 0, 36, 36)))
 	{
 		//Create and run animation
 		Vector<SpriteFrame*> animFrames(5);

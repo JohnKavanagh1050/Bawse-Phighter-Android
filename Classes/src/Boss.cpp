@@ -1,10 +1,27 @@
 #include "Boss.h"
 
+USING_NS_CC;
+
 Boss * Boss::create()
 {
 	Boss * boss = new Boss();
-	if (boss && boss->initWithFile("GameScreen/boss.png"))
+	if (boss && boss->initWithFile("GameScreen/ss_boss1.png", Rect(201, 206, 201, 206)))
 	{
+		//Create and run animation
+		Vector<SpriteFrame*> animFrames(7);
+		char str[100] = { 0 };
+		for (int i = 0; i < 7; i++)
+		{
+			sprintf(str, "GameScreen/ss_boss1.png", i);
+			auto frame = SpriteFrame::create(str, Rect(201 * i, 206, 201, 206)); //we assume that the sprites' dimentions are 30x30 rectangles.
+			animFrames.pushBack(frame);
+		}
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animate = Animate::create(animation);
+		
+		//boss->healthBar->setType = kCCProgressTimerTypeBar;
+
+		boss->runAction(animate);
 		boss->autorelease();
 		boss->initBoss();
 		return boss;
@@ -84,5 +101,5 @@ void Boss::idle()
 }
 
 void Boss::initBoss(){
-	lives = 5;
+	lives = 50;
 }

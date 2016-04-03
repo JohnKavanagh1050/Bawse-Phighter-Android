@@ -18,7 +18,7 @@ Bullet * Bullet::createPlayerBullet()
 			auto frame = SpriteFrame::create(str, Rect(27 * i, 0, 27, 27)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.05f, INFINITE);
 		auto animate = Animate::create(animation);
 
 		playerBullet->runAction(animate);

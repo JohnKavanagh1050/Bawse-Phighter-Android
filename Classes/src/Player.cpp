@@ -1,10 +1,27 @@
 #include "Player.h"
+USING_NS_CC;
 
 Player * Player::create()
 {
 	Player * player = new Player();
-	if (player && player->initWithFile("GameScreen/player.png"))
+	if (player && player->initWithFile("GameScreen/ninja.png", Rect(0, 0, 66, 99)))
 	{
+		//Create and run animation
+		Vector<SpriteFrame*> animFrames(3);
+		char str[100] = { 0 };
+		for (int i = 0; i < 3; i++)
+		{
+			sprintf(str, "GameScreen/ninja.png", i);
+			auto frame = SpriteFrame::create(str, Rect(66* i, 99, 66, 99)); 
+			animFrames.pushBack(frame);
+		}
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animate = Animate::create(animation);
+
+		//boss->healthBar->setType = kCCProgressTimerTypeBar;
+
+		player->runAction(animate);
+
 		player->initPlayer();
 		return player;
 	}
@@ -49,7 +66,7 @@ void Player::update(Level1* world)
 		Bullet *playerBullet = Bullet::createPlayerBullet();
 		currentPlayerBullets.push_back(playerBullet);
 		playerBullet->setPosition(getPosition().x, getPosition().y);
-		world->addChild(playerBullet, 5);
+		world->addChild(playerBullet, 3);
 		
 		counter = 0;
 	}

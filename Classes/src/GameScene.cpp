@@ -145,6 +145,7 @@ void Level1::update(float dt)
 		boss->getPosition().x - (boss->getContentSize().width / 2),
 		boss->getPosition().y - (boss->getContentSize().height / 2),
 		boss->getContentSize().width, boss->getContentSize().height);
+	//checks every bullet for collisions
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		playerBulletRect = CCRectMake(currentPlayerBullets[i]->getPosition().x - (currentPlayerBullets[i]->getContentSize().width / 2),
 			currentPlayerBullets[i]->getPosition().y - (currentPlayerBullets[i]->getContentSize().height / 2),
@@ -170,15 +171,19 @@ void Level1::update(float dt)
 			}
 		}
 	}
-	
+
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{
-		boss->move(0); // param '0' for left
+		if (boss->getPosition().x - player->getPositionX() >= 150){
+			boss->move(0); // param '0' for left
+		}
 	}
 	if (boss->getPosition().x < player->getPositionX())
 	{
-		boss->move(1); // param '1' for right
+		if (boss->getPosition().x - player->getPositionX() <= -150){
+			boss->move(1); // param '1' for right
+		}
 	}
 
 	//healthBar->setPosition(player->getPosition().x + 50, player->getPosition().y + 50);
