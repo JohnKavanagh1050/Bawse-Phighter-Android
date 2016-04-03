@@ -125,12 +125,12 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 	this->addChild(backgroundSprite, -1);
 }
 
-
 void Level1::update(float dt)
 {
 	//updates all enemy and player logic
 	player->update(this);
 	boss->update(this);
+	checkBoundaries();
 
 	currentPlayerBullets = player->getBullets();
 	currentBossBullets = boss->getBullets();
@@ -187,4 +187,23 @@ void Level1::update(float dt)
 	}
 
 	//healthBar->setPosition(player->getPosition().x + 50, player->getPosition().y + 50);
+}
+
+void Level1::checkBoundaries(){
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
+	if (player->getPosition().x >= s.width - 66){
+		player->setPosition(s.width - 66, player->getPositionY());
+	}
+
+	else if (player->getPosition().y >= s.height - 300){
+		player->setPosition(player->getPositionX(), s.height - 201);
+	}
+
+	else if (player->getPosition().x <= 0){
+		player->setPosition(0, player->getPositionY() + 99);
+	}
+
+	else if(player->getPosition().y <= 0){
+		player->setPosition(player->getPositionX() + 66, 0);
+	}
 }
