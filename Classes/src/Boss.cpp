@@ -12,15 +12,17 @@ Boss * Boss::create()
 		char str[100] = { 0 };
 		for (int i = 0; i < 7; i++)
 		{
-			sprintf(str, "GameScreen/ss_boss1.png", i);
+			sprintf(str, "GameScreen/ss_boss1.png");
 			auto frame = SpriteFrame::create(str, Rect(201 * i, 206, 201, 206)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, 100000);
 		auto animate = Animate::create(animation);
-		
-		//boss->healthBar->setType = kCCProgressTimerTypeBar;
-
+		cocos2d::Size size(201, 206);
+		auto bossBody = PhysicsBody::createBox(size);
+		bossBody->setCollisionBitmask(0x000002);
+		bossBody->setContactTestBitmask(true);
+		boss->setPhysicsBody(bossBody);
 		boss->runAction(animate);
 		boss->autorelease();
 		boss->initBoss();
@@ -101,5 +103,5 @@ void Boss::idle()
 }
 
 void Boss::initBoss(){
-	lives = 50;
+	lives = 5;
 }

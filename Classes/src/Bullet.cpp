@@ -14,18 +14,25 @@ Bullet * Bullet::createPlayerBullet()
 		char str[100] = { 0 };
 		for (int i = 0; i < 3; i++)
 		{
-			sprintf(str, "GameScreen/ninja_star.png", i);
+			sprintf(str, "GameScreen/ninja_star.png");
 			auto frame = SpriteFrame::create(str, Rect(27 * i, 0, 27, 27)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.05f, INFINITE);
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.05f, 100000);
 		auto animate = Animate::create(animation);
-
+		//make body for collisions
+		cocos2d::Size size(27, 27);
+		auto bulletBody = PhysicsBody::createBox(size);
+		bulletBody->setCollisionBitmask(0x000003);
+		bulletBody->setContactTestBitmask(true);
+		playerBullet->setPhysicsBody(bulletBody);
 		playerBullet->runAction(animate);
 		playerBullet->initBullet();
 
 		return playerBullet;
 	}
+	CC_SAFE_DELETE(playerBullet);
+	return NULL;
 }
 
 void Bullet::animateBullet()

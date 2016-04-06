@@ -23,7 +23,6 @@ bool Level1::init()
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
-	this->scheduleUpdate();
 
 	auto pauseItem =
 		MenuItemImage::create("GameScreen/Pause_Button.png",
@@ -63,9 +62,13 @@ bool Level1::init()
 	ttf1->setColor(Color3B(0,0,0));
 	this->addChild(ttf1, 4);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"GameMusic.wav", true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 
+	/*auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(Level1::onContactBegin, this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+	this->scheduleUpdate();
+	*/
 	return true;
 }
 
@@ -74,8 +77,7 @@ void Level1::activatePauseScene(Ref *pSender)
 	//auto scene = PauseMenu::createScene();
 	auto scene = GameOver::createScene();
 	Director::getInstance()->pushScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
-		"GameMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
 void Level1::activateMainMenuScene(cocos2d::Ref *pSender)
@@ -88,8 +90,7 @@ void Level1::activateGameOverScene(Ref *pSender)
 {
 	auto scene = GameOver::createScene();
 	Director::getInstance()->replaceScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
-		"GameMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
 void Level1::activateGameScene2(Ref * pSender)
@@ -130,7 +131,7 @@ void Level1::update(float dt)
 	//updates all enemy and player logic
 	player->update(this);
 	boss->update(this);
-	checkBoundaries();
+	//checkBoundaries();
 
 	currentPlayerBullets = player->getBullets();
 	currentBossBullets = boss->getBullets();
@@ -171,7 +172,7 @@ void Level1::update(float dt)
 			}
 		}
 	}
-
+	
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
 	{
@@ -189,7 +190,7 @@ void Level1::update(float dt)
 	//healthBar->setPosition(player->getPosition().x + 50, player->getPosition().y + 50);
 }
 
-void Level1::checkBoundaries(){
+/*void Level1::checkBoundaries(){
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 	if (player->getPosition().x >= s.width - 66){
 		player->setPosition(s.width - 66, player->getPositionY());
@@ -206,4 +207,28 @@ void Level1::checkBoundaries(){
 	else if(player->getPosition().y <= 0){
 		player->setPosition(player->getPositionX() + 66, 0);
 	}
-}
+}*/
+/*
+bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
+{
+	currentPlayerBullets = player->getBullets();
+	currentBossBullets = boss->getBullets();
+	PhysicsBody *a = contact.getShapeA()->getBody();
+	PhysicsBody *b = contact.getShapeB()->getBody();
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+
+	for (int i = 0; i < currentPlayerBullets.size(); i++){
+		if (0x000002 == a->getCollisionBitmask() && 0x000003 == b->getCollisionBitmask())
+		{
+			player->deletePlayerBullet(this, i);
+			boss->loseLives();
+			if (boss->getLives() <= 0){
+				activateGameScene2(this);
+			}
+		}
+	}
+
+	return true;
+}*/

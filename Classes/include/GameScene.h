@@ -41,7 +41,8 @@ public:
 
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event);
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
-	void checkBoundaries();
+	//void checkBoundaries();
+	bool onContactBegin(cocos2d::PhysicsContact &contact);
 
 	CREATE_FUNC(Level1);
 };

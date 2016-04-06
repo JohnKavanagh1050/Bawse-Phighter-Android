@@ -11,20 +11,24 @@ Player * Player::create()
 		char str[100] = { 0 };
 		for (int i = 0; i < 3; i++)
 		{
-			sprintf(str, "GameScreen/ninja.png", i);
+			sprintf(str, "GameScreen/ninja.png");
 			auto frame = SpriteFrame::create(str, Rect(66* i, 99, 66, 99)); 
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, INFINITE);
+		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, 100000);
 		auto animate = Animate::create(animation);
-
-		//boss->healthBar->setType = kCCProgressTimerTypeBar;
-
+		//make body for collisions
+		cocos2d::Size size(66, 99);
+		auto playerBody = PhysicsBody::createBox(size);
+		playerBody->setCollisionBitmask(0x000001);
+		playerBody->setContactTestBitmask(true);
+		player->setPhysicsBody(playerBody);
 		player->runAction(animate);
-
 		player->initPlayer();
 		return player;
 	}
+	CC_SAFE_DELETE(player);
+	return NULL;
 }
 
 void Player::move(float x ,float y)
