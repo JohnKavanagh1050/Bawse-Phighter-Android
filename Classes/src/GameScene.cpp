@@ -4,9 +4,11 @@ USING_NS_CC;
 
 Scene* Level1::createScene()
 {
-	// 'scene' is an autorelease object
-	auto scene = Scene::create();
+	auto scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setGravity(Vec2(0, 0));
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	auto layer = Level1::create();
+	layer->SetPhysicsWorld(scene->getPhysicsWorld());
 
 	scene->addChild(layer);
 
@@ -22,7 +24,6 @@ bool Level1::init()
 	listener->onTouchEnded = CC_CALLBACK_2(Level1::onTouchEnded, this);
 
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-
 
 	auto pauseItem =
 		MenuItemImage::create("GameScreen/Pause_Button.png",
@@ -56,19 +57,18 @@ bool Level1::init()
 //	healthBar->setPosition(Vec2(150, 120));
 //	this->addChild(healthBar, 5);
 
-	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "Ninja Penguin.ttf", 30,
-		CCSizeMake(245, 32), kCCTextAlignmentCenter);
+	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "Ninja Penguin.ttf", 30, CCSizeMake(245, 32), kCCTextAlignmentCenter);
 	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
 	ttf1->setColor(Color3B(0,0,0));
 	this->addChild(ttf1, 4);
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 
-	/*auto contactListener = EventListenerPhysicsContact::create();
+	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Level1::onContactBegin, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 	this->scheduleUpdate();
-	*/
+	
 	return true;
 }
 
@@ -133,7 +133,7 @@ void Level1::update(float dt)
 	boss->update(this);
 	//checkBoundaries();
 
-	currentPlayerBullets = player->getBullets();
+	/*currentPlayerBullets = player->getBullets();
 	currentBossBullets = boss->getBullets();
 	//handles collisions with rectangles in cocos
 	CCRect playerBulletRect;
@@ -171,7 +171,7 @@ void Level1::update(float dt)
 				activateMainMenuScene(this); 
 			}
 		}
-	}
+	}*/
 	
 	//boss movement
 	if (boss->getPosition().x > player->getPositionX())
@@ -186,40 +186,69 @@ void Level1::update(float dt)
 			boss->move(1); // param '1' for right
 		}
 	}
-
-	//healthBar->setPosition(player->getPosition().x + 50, player->getPosition().y + 50);
 }
 
-/*void Level1::checkBoundaries(){
-	CCSize s = CCDirector::sharedDirector()->getWinSize();
-	if (player->getPosition().x >= s.width - 66){
-		player->setPosition(s.width - 66, player->getPositionY());
-	}
-
-	else if (player->getPosition().y >= s.height - 300){
-		player->setPosition(player->getPositionX(), s.height - 201);
-	}
-
-	else if (player->getPosition().x <= 0){
-		player->setPosition(0, player->getPositionY() + 99);
-	}
-
-	else if(player->getPosition().y <= 0){
-		player->setPosition(player->getPositionX() + 66, 0);
-	}
-}*/
-/*
 bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 {
-	currentPlayerBullets = player->getBullets();
-	currentBossBullets = boss->getBullets();
 	PhysicsBody *a = contact.getShapeA()->getBody();
 	PhysicsBody *b = contact.getShapeB()->getBody();
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	if (nodeA && nodeB)
+	{
+		//bullet and boss collision
+		if (nodeA->getTag() == 10)
+		{
+			if (nodeB->getTag() == 30)
+			{
+				//player->deletePlayerBullet(this, i);
+				boss->loseLives();
+				if (boss->getLives() <= 0){
+					activateGameScene2(this);
+				}
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		if (nodeA->getTag() == 30)
+		{
+			if (nodeB->getTag() == 10)
+			{
+				//player->deletePlayerBullet(this, i);
+				boss->loseLives();
+				if (boss->getLives() <= 0){
+					activateGameScene2(this);
+				}
+				nodeB->removeFromParentAndCleanup(true);
+			}
+		}
 
-	for (int i = 0; i < currentPlayerBullets.size(); i++){
+	/*	//bossbullet and player collision
+		else if (nodeA->getTag() == 40)
+		{
+			if (nodeB->getTag() == 20)
+			{
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateMainMenuScene(this);
+				}
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		if (nodeA->getTag() == 20)
+		{
+			if (nodeB->getTag() == 40)
+			{
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateMainMenuScene(this);
+				}
+				nodeB->removeFromParentAndCleanup(true);
+			}
+		}*/
+	}
+
+	/*for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (0x000002 == a->getCollisionBitmask() && 0x000003 == b->getCollisionBitmask())
 		{
 			player->deletePlayerBullet(this, i);
@@ -228,7 +257,15 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				activateGameScene2(this);
 			}
 		}
-	}
+		if (0x000003 == a->getCollisionBitmask() && 0x000002 == b->getCollisionBitmask())
+		{
+			player->deletePlayerBullet(this, i);
+			boss->loseLives();
+			if (boss->getLives() <= 0){
+				activateGameScene2(this);
+			}
+		}
+	}*/
 
 	return true;
-}*/
+}

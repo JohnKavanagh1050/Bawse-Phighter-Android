@@ -65,7 +65,12 @@
     <ClInclude Include="..\Classes\include\HealthBar.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\include\GameScene2.h" />
+    <ClInclude Include="..\Classes\include\GameScene2.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\include\Boss2.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp">
@@ -110,6 +115,11 @@
     <ClCompile Include="..\Classes\src\HealthBar.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\src\GaneScene2.cpp" />
+    <ClCompile Include="..\Classes\src\GameScene2.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Boss2.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

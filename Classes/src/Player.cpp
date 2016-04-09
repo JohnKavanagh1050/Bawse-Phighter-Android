@@ -15,16 +15,18 @@ Player * Player::create()
 			auto frame = SpriteFrame::create(str, Rect(66* i, 99, 66, 99)); 
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, 100000);
-		auto animate = Animate::create(animation);
+		auto animation = CCAnimation::createWithSpriteFrames(animFrames, 0.15f, 100000);
+		auto animate = CCAnimate::create(animation);
 		//make body for collisions
 		cocos2d::Size size(66, 99);
 		auto playerBody = PhysicsBody::createBox(size);
 		playerBody->setCollisionBitmask(0x000001);
 		playerBody->setContactTestBitmask(true);
+		playerBody->setTag(20);
 		player->setPhysicsBody(playerBody);
 		player->runAction(animate);
 		player->initPlayer();
+		player->setTag(20);
 		return player;
 	}
 	CC_SAFE_DELETE(player);

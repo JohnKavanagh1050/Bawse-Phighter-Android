@@ -27,6 +27,8 @@ private:
 	std::vector<BossBullet*> currentBossBullets;
 
 public:
+	cocos2d::PhysicsWorld * sceneWorld;
+	void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	// Called when user pauses gameplay.
@@ -43,6 +45,8 @@ public:
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event);
 	//void checkBoundaries();
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
+
+
 
 	CREATE_FUNC(Level1);
 };

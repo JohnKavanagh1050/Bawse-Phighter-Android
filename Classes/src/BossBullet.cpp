@@ -16,17 +16,19 @@ BossBullet * BossBullet::createBossBullet()
 			auto frame = SpriteFrame::create(str, Rect(36 * i, 0, 36, 36)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
-		auto animation = Animation::createWithSpriteFrames(animFrames, 0.15f, 100000);
-		auto animate = Animate::create(animation);
+		auto animation = CCAnimation::createWithSpriteFrames(animFrames, 0.15f, 100000);
+		auto animate = CCAnimate::create(animation);
 		//make body for collisions
 		cocos2d::Size size(36, 36);
 		auto bossBulletBody = PhysicsBody::createBox(size);
 		bossBulletBody->setCollisionBitmask(0x000004);
 		bossBulletBody->setContactTestBitmask(true);
 		bossBullet->setPhysicsBody(bossBulletBody);
+		bossBulletBody->setTag(40);
 		bossBullet->runAction(animate);
 		bossBullet->autorelease();
 		bossBullet->initBullet();
+		bossBullet->setTag(40);
 		return bossBullet;
 	}
 

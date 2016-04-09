@@ -51,7 +51,7 @@ bool MainMenu::init()
 void MainMenu::activateGameScene(Ref * pSender)
 {
 	auto scene = Level1::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	Director::getInstance()->replaceScene(scene);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 }

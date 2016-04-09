@@ -19,14 +19,12 @@ class LevelLoader {
 private:	
 	Document m_document;	// A container for a JSON document
 	std::string m_JSONData;
-	
 
 	void loadJSONData(std::string const & filename);
 
 	void loadGameData();
 
 	std::string wStringToString(std::wstring const & wstr);
-
 
 public:
 	////////////////////////////////////////////////////////////
