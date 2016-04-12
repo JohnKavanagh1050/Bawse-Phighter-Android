@@ -5,9 +5,11 @@
 #include "GameData.h"
 #include "GameOverScene.h"
 #include "GameStates.h"
+
 #include "Bullet.h"
 #include "BossBullet.h"
 #include "HealthBar.h"
+#include "GameScene.h"
 
 #include "SimpleAudioEngine.h"  
 
@@ -17,10 +19,8 @@ class Level2 : public cocos2d::Layer
 {
 private:
 	GameStates m_gameState;
-	//HealthBar* healthBar;
-
-	std::vector<Bullet*> currentPlayerBullets;
-	std::vector<BossBullet*> currentBossBullets;
+	//Boss2 * boss2;
+	//Player * player;
 
 public:
 	static cocos2d::Scene* createScene();

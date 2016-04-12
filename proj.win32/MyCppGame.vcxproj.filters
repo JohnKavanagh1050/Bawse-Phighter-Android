@@ -71,6 +71,9 @@
     <ClInclude Include="..\Classes\include\Boss2.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\include\Background.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp">
@@ -119,6 +122,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\src\Boss2.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Background.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

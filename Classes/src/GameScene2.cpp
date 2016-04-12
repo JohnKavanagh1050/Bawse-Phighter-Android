@@ -29,35 +29,26 @@ bool Level2::init()
 	Point origin = Director::getInstance()->getVisibleOrigin();
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 
-	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 2", "Ninja Penguin.ttf", 30,
-		CCSizeMake(245, 32), kCCTextAlignmentCenter);
+	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 2", "Ninja Penguin.ttf", 30, CCSizeMake(245, 32), kCCTextAlignmentCenter);
 	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
 	ttf1->setColor(Color3B(0, 0, 0));
 	this->addChild(ttf1, 4);
 
-	auto pauseItem =
-		MenuItemImage::create("GameScreen/Pause_Button.png",
-		"GameScreen/Pause_Button(Click).png",
-		CC_CALLBACK_1(Level2::activatePauseScene, this));
+	auto pauseItem = MenuItemImage::create("GameScreen/Pause_Button.png",
+		"GameScreen/Pause_Button(Click).png", CC_CALLBACK_1(Level2::activatePauseScene, this));
 
-	pauseItem->setPosition(Point(pauseItem->getContentSize().width -
-		(pauseItem->getContentSize().width / 4) + origin.x,
-		visibleSize.height - pauseItem->getContentSize().height +
-		(pauseItem->getContentSize().width / 4) + origin.y));
+	pauseItem->setPosition(Point(pauseItem->getContentSize().width - (pauseItem->getContentSize().width / 4) + origin.x,
+		visibleSize.height - pauseItem->getContentSize().height + (pauseItem->getContentSize().width / 4) + origin.y));
 
 	auto menu = Menu::create(pauseItem, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 
-	addBackGroundSprite(visibleSize, origin);
+	//boss2 = Boss2::create();
+	//boss2->setPosition(Vec2(s.width / 2, s.height / 2));
+	//this->addChild(boss2, 5);
 
-
-	//	healthBar = HealthBar::create();
-	//	healthBar->setPosition(Vec2(150, 120));
-	//	this->addChild(healthBar, 5);
-
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"GameMusic.wav", true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 
 	return true;
 }
@@ -67,8 +58,7 @@ void Level2::activatePauseScene(Ref *pSender)
 	//auto scene = PauseMenu::createScene();
 	auto scene = GameOver::createScene();
 	Director::getInstance()->pushScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
-		"GameMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
 void Level2::activateMainMenuScene(cocos2d::Ref *pSender)
@@ -81,8 +71,7 @@ void Level2::activateGameOverScene(Ref *pSender)
 {
 	auto scene = GameOver::createScene();
 	Director::getInstance()->replaceScene(scene);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(
-		"GameMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
 bool Level2::onTouchBegan(Touch *touch, Event *event)
@@ -92,6 +81,7 @@ bool Level2::onTouchBegan(Touch *touch, Event *event)
 
 void Level2::onTouchEnded(Touch *touch, Event *event)
 {
+
 }
 
 void Level2::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Point const & origin)

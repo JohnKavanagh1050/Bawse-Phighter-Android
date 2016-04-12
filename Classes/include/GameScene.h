@@ -14,6 +14,7 @@
 
 #include <iostream>
 class Boss;
+class Boss2;
 class Player;
 class Level1 : public cocos2d::Layer
 {
@@ -21,10 +22,14 @@ private:
 	GameStates m_gameState;
 	Player* player;
 	Boss* boss;
+	Boss2* boss2;
 	//HealthBar* healthBar;
 
 	std::vector<Bullet*> currentPlayerBullets;
 	std::vector<BossBullet*> currentBossBullets;
+
+	// local variable declaration:
+	char level = 'A';
 
 public:
 	cocos2d::PhysicsWorld * sceneWorld;
@@ -46,9 +51,8 @@ public:
 	//void checkBoundaries();
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
 
-
-
 	CREATE_FUNC(Level1);
 };
 #include "Boss.h"
+#include "Boss2.h"
 #include "Player.h"

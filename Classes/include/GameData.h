@@ -15,7 +15,6 @@ private:
 	GameData();
 
 	static std::weak_ptr<GameData> m_instance;
-
 	friend std::weak_ptr < GameData >;
 	friend std::shared_ptr < GameData >;
 public:

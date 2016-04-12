@@ -18,6 +18,7 @@ public:
 	void deletePlayerBullet(Level1* world, int i);
 
 	bool Hit();
+
 	float getLives();
 
 	std::vector<Bullet*> getBullets();

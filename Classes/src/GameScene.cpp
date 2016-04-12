@@ -43,39 +43,50 @@ bool Level1::init()
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 
-	addBackGroundSprite(visibleSize, origin);
-
-	player = Player::create();
-	player->setPosition(Vec2(100, 70));
-	this->addChild(player, 5);
-
-	boss = Boss::create();
-	boss->setPosition(Vec2(300, 350));
-	this->addChild(boss, 5);
-
-//	healthBar = HealthBar::create();
-//	healthBar->setPosition(Vec2(150, 120));
-//	this->addChild(healthBar, 5);
-
 	CCLabelTTF* ttf1 = CCLabelTTF::create("Level 1", "Ninja Penguin.ttf", 30, CCSizeMake(245, 32), kCCTextAlignmentCenter);
-	ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
-	ttf1->setColor(Color3B(0,0,0));
-	this->addChild(ttf1, 4);
+	switch (level)
+	{
+	case 'A':
+		addBackGroundSprite(visibleSize, origin);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
+		player = Player::create();
+		player->setPosition(Vec2(100, 70));
+		this->addChild(player, 5);
+
+		boss = Boss::create();
+		boss->setPosition(Vec2(300, 350));
+		this->addChild(boss, 5);
+
+		//	healthBar = HealthBar::create();
+		//	healthBar->setPosition(Vec2(150, 120));
+		//	this->addChild(healthBar, 5);
+
+		ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
+		ttf1->setColor(Color3B(0, 0, 0));
+		this->addChild(ttf1, 4);
+
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
+		break;
+	case 'B':
+
+		player = Player::create();
+		player->setPosition(Vec2(100, 70));
+		this->addChild(player, 5);
+		break;
+	}
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Level1::onContactBegin, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 	this->scheduleUpdate();
-	
+
 	return true;
 }
 
 void Level1::activatePauseScene(Ref *pSender)
 {
-	//auto scene = PauseMenu::createScene();
-	auto scene = GameOver::createScene();
+	auto scene = PauseMenu::createScene();
+	//auto scene = GameOver::createScene();
 	Director::getInstance()->pushScene(scene);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
@@ -96,7 +107,7 @@ void Level1::activateGameOverScene(Ref *pSender)
 void Level1::activateGameScene2(Ref * pSender)
 {
 	auto scene = Level2::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, scene, Color3B(0, 0, 0)));
+	Director::getInstance()->replaceScene(scene);
 }
 
 bool Level1::onTouchBegan(Touch *touch, Event *event)
@@ -128,63 +139,73 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 
 void Level1::update(float dt)
 {
-	//updates all enemy and player logic
-	player->update(this);
-	boss->update(this);
-	//checkBoundaries();
+	switch (level)
+	{
+	case 'A':
+		//updates all enemy and player logic
+		player->update(this);
+		boss->update(this);
+		//checkBoundaries();
 
-	/*currentPlayerBullets = player->getBullets();
-	currentBossBullets = boss->getBullets();
-	//handles collisions with rectangles in cocos
-	CCRect playerBulletRect;
-	CCRect bossBulletRect;
-	CCRect playerRect = CCRectMake(
+		/*currentPlayerBullets = player->getBullets();
+		currentBossBullets = boss->getBullets();
+		//handles collisions with rectangles in cocos
+		CCRect playerBulletRect;
+		CCRect bossBulletRect;
+		CCRect playerRect = CCRectMake(
 		player->getPosition().x - (player->getContentSize().width / 2),
 		player->getPosition().y - (player->getContentSize().height / 2),
 		player->getContentSize().width, player->getContentSize().height);
-	CCRect bossRect = CCRectMake(
+		CCRect bossRect = CCRectMake(
 		boss->getPosition().x - (boss->getContentSize().width / 2),
 		boss->getPosition().y - (boss->getContentSize().height / 2),
 		boss->getContentSize().width, boss->getContentSize().height);
-	//checks every bullet for collisions
-	for (int i = 0; i < currentPlayerBullets.size(); i++){
+		//checks every bullet for collisions
+		for (int i = 0; i < currentPlayerBullets.size(); i++){
 		playerBulletRect = CCRectMake(currentPlayerBullets[i]->getPosition().x - (currentPlayerBullets[i]->getContentSize().width / 2),
-			currentPlayerBullets[i]->getPosition().y - (currentPlayerBullets[i]->getContentSize().height / 2),
-			currentPlayerBullets[i]->getContentSize().width, currentPlayerBullets[i]->getContentSize().height);
+		currentPlayerBullets[i]->getPosition().y - (currentPlayerBullets[i]->getContentSize().height / 2),
+		currentPlayerBullets[i]->getContentSize().width, currentPlayerBullets[i]->getContentSize().height);
 		if (bossRect.intersectsRect(playerBulletRect)){
-			player->deletePlayerBullet(this, i);
-			boss->loseLives();
-			if (boss->getLives() <= 0){
-				activateGameScene2(this);
-			}
+		player->deletePlayerBullet(this, i);
+		boss->loseLives();
+		if (boss->getLives() <= 0){
+		activateGameScene2(this);
 		}
-	}
+		}
+		}
 
-	for (int i = 0; i < currentBossBullets.size(); i++){
+		for (int i = 0; i < currentBossBullets.size(); i++){
 		bossBulletRect = CCRectMake(currentBossBullets[i]->getPosition().x - (currentBossBullets[i]->getContentSize().width / 2),
-			currentBossBullets[i]->getPosition().y - (currentBossBullets[i]->getContentSize().height / 2),
-			currentBossBullets[i]->getContentSize().width, currentBossBullets[i]->getContentSize().height);
+		currentBossBullets[i]->getPosition().y - (currentBossBullets[i]->getContentSize().height / 2),
+		currentBossBullets[i]->getContentSize().width, currentBossBullets[i]->getContentSize().height);
 		if (playerRect.intersectsRect(bossBulletRect)){
-			boss->deleteBossBullet(this, i);
-			player->loseLives();
-			if (player->getLives() <= 0){
-				activateMainMenuScene(this); 
+		boss->deleteBossBullet(this, i);
+		player->loseLives();
+		if (player->getLives() <= 0){
+		activateMainMenuScene(this);
+		}
+		}
+		}*/
+
+		//boss movement
+		if (boss->getPosition().x > player->getPositionX())
+		{
+			if (boss->getPosition().x - player->getPositionX() >= 150){
+				boss->move(0); // param '0' for left
 			}
 		}
-	}*/
-	
-	//boss movement
-	if (boss->getPosition().x > player->getPositionX())
-	{
-		if (boss->getPosition().x - player->getPositionX() >= 150){
-			boss->move(0); // param '0' for left
+		if (boss->getPosition().x < player->getPositionX())
+		{
+			if (boss->getPosition().x - player->getPositionX() <= -150){
+				boss->move(1); // param '1' for right
+			}
 		}
-	}
-	if (boss->getPosition().x < player->getPositionX())
-	{
-		if (boss->getPosition().x - player->getPositionX() <= -150){
-			boss->move(1); // param '1' for right
-		}
+		break;
+	case 'B':
+		//updates all enemy and player logic
+		player->update(this);
+		boss2->update(this);
+		break;
 	}
 }
 
@@ -205,7 +226,15 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				//player->deletePlayerBullet(this, i);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
-					activateGameScene2(this);
+				//	activateGameScene2(this);
+					level = 'B';
+					nodeB->removeFromParentAndCleanup(true);
+					auto mySprite = Sprite::create("GameScreen/Background2.png");
+					mySprite->setPosition(Vec2(0, 0));
+					this->addChild(mySprite, -1);
+					boss2 = Boss2::create();
+					boss2->setPosition(Vec2(100, 70));
+					this->addChild(boss2, 5);
 				}
 				nodeA->removeFromParentAndCleanup(true);
 			}
@@ -217,55 +246,62 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				//player->deletePlayerBullet(this, i);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
-					activateGameScene2(this);
+					level = 'B';
+					nodeA->removeFromParentAndCleanup(true);
+					auto mySprite = Sprite::create("GameScreen/Background2.png");
+					mySprite->setPosition(Vec2(0, 0));
+					this->addChild(mySprite, -1);
+					boss2 = Boss2::create();
+					boss2->setPosition(Vec2(100, 70));
+					this->addChild(boss2, 5);
 				}
 				nodeB->removeFromParentAndCleanup(true);
 			}
 		}
 
-	/*	//bossbullet and player collision
-		else if (nodeA->getTag() == 40)
-		{
+		/*	//bossbullet and player collision
+			else if (nodeA->getTag() == 40)
+			{
 			if (nodeB->getTag() == 20)
 			{
-				player->loseLives();
-				if (player->getLives() <= 0){
-					activateMainMenuScene(this);
-				}
-				nodeA->removeFromParentAndCleanup(true);
+			player->loseLives();
+			if (player->getLives() <= 0){
+			activateMainMenuScene(this);
 			}
-		}
-		if (nodeA->getTag() == 20)
-		{
+			nodeA->removeFromParentAndCleanup(true);
+			}
+			}
+			if (nodeA->getTag() == 20)
+			{
 			if (nodeB->getTag() == 40)
 			{
-				player->loseLives();
-				if (player->getLives() <= 0){
-					activateMainMenuScene(this);
-				}
-				nodeB->removeFromParentAndCleanup(true);
+			player->loseLives();
+			if (player->getLives() <= 0){
+			activateMainMenuScene(this);
 			}
-		}*/
+			nodeB->removeFromParentAndCleanup(true);
+			}
+			}*/
 	}
 
 	/*for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (0x000002 == a->getCollisionBitmask() && 0x000003 == b->getCollisionBitmask())
 		{
-			player->deletePlayerBullet(this, i);
-			boss->loseLives();
-			if (boss->getLives() <= 0){
-				activateGameScene2(this);
-			}
+		player->deletePlayerBullet(this, i);
+		boss->loseLives();
+		if (boss->getLives() <= 0){
+		activateGameScene2(this);
+		}
 		}
 		if (0x000003 == a->getCollisionBitmask() && 0x000002 == b->getCollisionBitmask())
 		{
-			player->deletePlayerBullet(this, i);
-			boss->loseLives();
-			if (boss->getLives() <= 0){
-				activateGameScene2(this);
-			}
+		player->deletePlayerBullet(this, i);
+		boss->loseLives();
+		if (boss->getLives() <= 0){
+		activateGameScene2(this);
 		}
-	}*/
+		}
+		}*/
 
 	return true;
 }
