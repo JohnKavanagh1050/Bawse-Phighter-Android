@@ -4,7 +4,7 @@
 #include "GameData.h"
 #include "GameStates.h"
 #include "BossBullet.h"
-#include "GameScene2.h"
+#include "GameScene.h"
 
 class Boss2 : public cocos2d::Sprite{
 public:

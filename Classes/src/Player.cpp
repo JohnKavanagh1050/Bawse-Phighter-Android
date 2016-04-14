@@ -63,10 +63,11 @@ std::vector<Bullet*> Player::getBullets()
 void Player::update(Level1* world)
 {	
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
-		currentPlayerBullets[i]->updatePlayerBullet();
 		if (currentPlayerBullets[i]->getRemove()){
 			deletePlayerBullet(world, i);
+			//currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 		}
+		else currentPlayerBullets[i]->updatePlayerBullet();
 	}
 	if (counter % (SECOND) == 0){
 		Bullet *playerBullet = Bullet::createPlayerBullet();
@@ -97,4 +98,5 @@ void Player::idle()
 void Player::initPlayer(){
 	speed = 5.f;
 	dirX = dirY = 0;
+	lives = 10;
 }

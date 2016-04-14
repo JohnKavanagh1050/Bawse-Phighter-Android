@@ -87,11 +87,11 @@ void Boss::deleteBossBullet(Level1* world, int i)
 void Boss::update(Level1* world)
 {
 	for (int i = 0; i < currentBossBullets.size(); i++){
-		currentBossBullets[i]->update();
 		if (currentBossBullets[i]->getRemove()){
 			deleteBossBullet(world, i);
-			currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
+			//currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 		}
+		else currentBossBullets[i]->update();
 	}
 	if (bossCounter % (SECOND) == 0){
 		BossBullet *bossBullet = BossBullet::createBossBullet();

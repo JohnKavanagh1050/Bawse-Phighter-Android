@@ -2,37 +2,12 @@
 
 USING_NS_CC;
 
-typedef struct tagResource
-{
-	cocos2d::Size size;
-	char directory[100];
-} Resource;
-
 Bullet * Bullet::createPlayerBullet()
 {
 	Bullet * playerBullet = new Bullet();
 
 	if (playerBullet && playerBullet->initWithFile("GameScreen/ninja_star.png", Rect(0, 0, 27, 27)))
 	{
-		// Landscape config.
-		// 800x480 = Normal screen, WVGA 
-		static Resource smallResource = { cocos2d::Size(800, 480), "sd" };
-		// 1280x800 = Extra large screen, WXGA, medium density screen (160)
-		static Resource mediumResource = { cocos2d::Size(1280, 800), "hd" };
-		// 1900x1200 = WUXGA, Devices with such as Nexus 7, Nvidia Shield.
-		static Resource largeResource = { cocos2d::Size(1920, 1200), "shd" };
-
-		static cocos2d::Size designResolutionSize = smallResource.size;
-
-		CCSize s = CCDirector::sharedDirector()->getWinSize();
-
-		std::vector<std::string> searchPaths;
-		float scaleFactor = 1.0f;
-
-		if (s.height > mediumResource.size.height)
-		{
-			scaleFactor = largeResource.size.height / designResolutionSize.height;
-		}
 		//Create and run animation
 		Vector<SpriteFrame*> animFrames(3);
 		char str[100] = { 0 };
@@ -76,9 +51,9 @@ void Bullet::initBullet(){
 	remove = false;
 }
 
-void Bullet::updatePlayerBullet(){
+void Bullet::updatePlayerBullet()
+{
 	setPositionY(getPositionY() + 5);
-
 	timecounter++;
 	if (timecounter >= 1000){
 		remove = true;

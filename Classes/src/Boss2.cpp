@@ -12,7 +12,7 @@ Boss2 * Boss2::create()
 		char str[100] = { 0 };
 		for (int i = 0; i < 4; i++)
 		{
-			sprintf(str, "GameScreen/bos2.png");
+			sprintf(str, "GameScreen/boss2.png");
 			auto frame = SpriteFrame::create(str, Rect(278 * i, 0, 278, 398));
 			//auto frame = SpriteFrame::create(str, Rect(201 * i, 206, 201, 206)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
@@ -60,36 +60,7 @@ void Boss2::deleteBossBullet(Level1* world, int i)
 
 void Boss2::update(Level1* world)
 {
-	for (int i = 0; i < currentBossBullets.size(); i++){
-		currentBossBullets[i]->update();
-		if (currentBossBullets[i]->getRemove()){
-			deleteBossBullet(world, i);
-			currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
-		}
-	}
-	if (bossCounter % (SECOND) == 0){
-		BossBullet *bossBullet = BossBullet::createBossBullet();
-		currentBossBullets.push_back(bossBullet);
-		bossBullet->setPosition(getPosition().x, getPosition().y);
-		world->addChild(bossBullet, 5);
-		bossCounter = 0;
-	}
-
-	if (moving) //check if moving
-	{
-		if (direction == 0) //check if going left
-		{
-			this->setPositionX(this->getPositionX() - 2);
-		}
-		else if (direction == 1)  //right
-		{
-			this->setPositionX(this->getPositionX() + 2);
-		}
-	}
-
-	bossCounter++;
-
-	return;
+	
 }
 
 float Boss2::getLives(){

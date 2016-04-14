@@ -45,6 +45,11 @@ void BossBullet::initBullet(){
 	remove = false;
 }
 
+void BossBullet::setTrue()
+{
+	remove = true;
+}
+
 void BossBullet::update()
 {
 	setPositionY(getPositionY()-3);
