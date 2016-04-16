@@ -12,6 +12,7 @@ public:
 
 	void move(float x, float y);
 	void update(Level1* world);
+	void updateLevel2(Level1* world);
 	void Boundaries();
 	void idle();
 	void loseLives();

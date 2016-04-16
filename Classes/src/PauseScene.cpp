@@ -15,6 +15,9 @@ Scene* PauseMenu::createScene()
 
 bool PauseMenu::init()
 {
+	auto menuTitle =
+		MenuItemImage::create("GameOverScreen/Game_Over.png",
+		"GameOverScreen/Game_Over.png");
 	auto resumeItem =
 		MenuItemImage::create("PauseScreen/Resume_Button.png",
 		"PauseScreen/Resume_Button(Click).png",
@@ -27,11 +30,12 @@ bool PauseMenu::init()
 		MenuItemImage::create("PauseScreen/Menu_Button.png",
 		"PauseScreen/Menu_Button(Click).png",
 		CC_CALLBACK_1(PauseMenu::activateMainMenuScene, this));
-	auto menu = Menu::create(resumeItem, retryItem, mainMenuItem,
+	auto menu = Menu::create(menuTitle, resumeItem, retryItem, mainMenuItem,
 		NULL);
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	menu->alignItemsVerticallyWithPadding(visibleSize.height / 4);
+	//menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
+	menu->alignItemsVertically();
 	this->addChild(menu);
 
 	return true;

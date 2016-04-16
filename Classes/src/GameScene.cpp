@@ -68,14 +68,14 @@ bool Level1::init()
 		mySprite->setPosition(Vec2(s.width / 2, s.height / 2));
 		this->addChild(mySprite, -1);
 
-		auto boss2 = Boss2::create();
-		boss2->setPosition(Vec2(s.width / 2, s.height / 2));
+		boss2 = Boss2::create();
 		this->addChild(boss2, 5);
+		boss2->setPosition(Vec2(s.width / 2, s.height / 2));
 
-		CCLabelTTF* ttf1 = CCLabelTTF::create("Level 2", "Ninja Penguin.ttf", 30, CCSizeMake(245, 32), kCCTextAlignmentCenter);
-		ttf1->setPosition(Vec2(s.width / 2, s.height - 30));
-		ttf1->setColor(Color3B(0, 0, 0));
-		this->addChild(ttf1, 4);
+		CCLabelTTF* ttf2 = CCLabelTTF::create("Level 2", "Ninja Penguin.ttf", 30, CCSizeMake(245, 32), kCCTextAlignmentCenter);
+		ttf2->setPosition(Vec2(s.width / 2, s.height - 30));
+		ttf2->setColor(Color3B(0, 0, 0));
+		this->addChild(ttf2, 4);
 		break;
 	}
 
@@ -207,8 +207,10 @@ void Level1::update(float dt)
 		break;
 	case 'B':
 		//updates all enemy2 and player logic
-		player->update(this);
+		player->updateLevel2(this);
 		boss2->update(this);
+		break;
+	case 'C':
 		break;
 	}
 }

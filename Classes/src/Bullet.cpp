@@ -59,3 +59,33 @@ void Bullet::updatePlayerBullet()
 		remove = true;
 	}
 }
+
+void Bullet::updatePlayerBulletLevel2()
+{
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
+	//bottom left corner
+	if (getPositionX() < s.width / 2 && getPositionY() < s.height / 2)
+	{ 
+		setPosition(getPositionX() + 5, getPositionY() + 5);
+	}
+	//top right corner
+	if (getPositionX() > s.width / 2 && getPositionY() > s.height / 2)
+	{
+		setPosition(getPositionX() - 5, getPositionY() - 5);
+	}
+	//top left corner
+	if (getPositionY() > s.height / 2 && getPositionX() < s.width / 2)
+	{
+		setPosition(getPositionX() + 5, getPositionY() - 5);
+	}
+	//bottom right corner
+	if (getPositionY() < s.height / 2 && getPositionX() > s.width / 2)
+	{
+		setPosition(getPositionX() - 5, getPositionY() + 5);
+	}
+	
+	timecounter++;
+	if (timecounter >= 100){
+		remove = true;
+	}
+}

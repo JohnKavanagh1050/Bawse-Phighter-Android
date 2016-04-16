@@ -86,6 +86,35 @@ void Player::update(Level1* world)
 	counter++;
 }
 
+void Player::updateLevel2(Level1* world)
+{
+	for (int i = 0; i < currentPlayerBullets.size(); i++){
+		if (currentPlayerBullets[i]->getRemove()){
+			deletePlayerBullet(world, i);
+			//currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
+		}
+		else currentPlayerBullets[i]->updatePlayerBulletLevel2();
+	}
+	if (counter % (SECOND) == 0){
+		Bullet *playerBullet = Bullet::createPlayerBullet();
+		currentPlayerBullets.push_back(playerBullet);
+		playerBullet->setPosition(getPosition().x, getPosition().y);
+		world->addChild(playerBullet, 3);
+
+		counter = 0;
+	}
+
+	if (moving) //check if moving
+	{
+		setPositionX(getPosition().x + dirX * speed);
+		setPositionY(getPosition().y + dirY * speed);
+		
+	}
+	counter++;
+
+}
+
+
 void Player::loseLives(){
 	lives--;
 }

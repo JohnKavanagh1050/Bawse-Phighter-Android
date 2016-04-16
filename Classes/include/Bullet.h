@@ -10,8 +10,10 @@ public:
 	static Bullet * createPlayerBullet(void);
 	void initBullet();
 	void updatePlayerBullet();
+	void updatePlayerBulletLevel2();
 	bool getRemove();
 	void animateBullet();
+	
 private:
 	int timeAlive;
 	int timecounter;

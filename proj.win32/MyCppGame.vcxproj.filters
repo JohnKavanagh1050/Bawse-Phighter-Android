@@ -74,6 +74,9 @@
     <ClInclude Include="..\Classes\include\Background.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\include\Missile.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\src\AppDelegate.cpp">
@@ -125,6 +128,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\src\Background.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\src\Missile.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
