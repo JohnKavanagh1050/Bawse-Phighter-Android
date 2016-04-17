@@ -17,4 +17,5 @@ private:
 	int timecounter;
 	short const TIMETOLIVE = 60;
 	bool remove;
+	char state = 'A';
 };

@@ -4,6 +4,7 @@
 #include "GameData.h"
 #include "GameStates.h"
 #include "BossBullet.h"
+#include "Missile.h"
 #include "GameScene.h"
 #include "Player.h"
 
@@ -16,6 +17,7 @@ public:
 	void idle();
 	void Defeated();
 	void deleteBossBullet(Level1* world, int i);
+	void deleteMissile(Level1* world, int i);
 	void loseLives();
 
 	bool Hit();
@@ -23,15 +25,18 @@ public:
 	float getLives();
 
 	std::vector<BossBullet*> getBullets();
+	std::vector<Missile*> getMissiles();
 private:
 	const short SECOND = 60;
 	int direction, lives;
 	bool moving;
 	bool hit;
 	short bossCounter;
+	short missileCounter;
 //	Player* player;
 
 	std::vector<BossBullet*> currentBossBullets;
+	std::vector<Missile*> currentMissiles;
 
 	//CCProgressTimer *healthBar;
 };

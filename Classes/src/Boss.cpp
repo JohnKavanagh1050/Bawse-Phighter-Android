@@ -11,7 +11,7 @@ typedef struct tagResource
 Boss * Boss::create()
 {
 	Boss * boss = new Boss();
-	if (boss && boss->initWithFile("GameScreen/ss_boss1.png", Rect(201, 206, 201, 206)))
+	if (boss && boss->initWithFile("GameScreen/ss_boss1.png", Rect(134, 137, 134, 137)))
 	{
 		// Landscape config.
 		// 800x480 = Normal screen, WVGA 
@@ -39,13 +39,13 @@ Boss * Boss::create()
 		for (int i = 0; i < 7; i++)
 		{
 			sprintf(str, "GameScreen/ss_boss1.png");
-			auto frame = SpriteFrame::create(str, Rect((201 * scaleFactor) * i, 206 * scaleFactor, 201 * scaleFactor, 206 * scaleFactor)); 
+			auto frame = SpriteFrame::create(str, Rect((134 * scaleFactor) * i, 137 * scaleFactor, 134 * scaleFactor, 137 * scaleFactor)); 
 			//auto frame = SpriteFrame::create(str, Rect(201 * i, 206, 201, 206)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
 		auto animation = CCAnimation::createWithSpriteFrames(animFrames, 0.15f, 100000);
 		auto animate = CCAnimate::create(animation);
-		cocos2d::Size size(201, 206);
+		cocos2d::Size size(134, 137);
 		auto bossBody = PhysicsBody::createBox(size);
 		bossBody->setCollisionBitmask(0x000002);
 		bossBody->setContactTestBitmask(true);
@@ -73,9 +73,20 @@ void Boss::move(int directionParam)
 	hit = true;
 }*/
 
+std::vector<Missile*> Boss::getMissiles()
+{
+	return currentMissiles;
+}
+
 std::vector<BossBullet*> Boss::getBullets()
 {
 	return currentBossBullets;
+}
+
+void Boss::deleteMissile(Level1* world, int i)
+{
+	world->removeChild(currentMissiles[i]);
+	currentMissiles.erase(std::remove(currentMissiles.begin(), currentMissiles.end(), currentMissiles[i]));
 }
 
 void Boss::deleteBossBullet(Level1* world, int i)
@@ -100,6 +111,22 @@ void Boss::update(Level1* world)
 		world->addChild(bossBullet, 5);
 		bossCounter = 0;
 	}
+	if (lives <= 40){
+		for (int i = 0; i < currentMissiles.size(); i++){
+			if (currentMissiles[i]->getRemove()){
+				deleteMissile(world, i);
+			}
+			else currentMissiles[i]->update();
+		}
+
+		if (missileCounter % (SECOND * 2) == 0){
+			Missile *missile = Missile::createMissile();
+			currentMissiles.push_back(missile);
+			missile->setPosition(getPosition().x, getPosition().y);
+			world->addChild(missile, 5);
+			missileCounter = 0;
+		}
+	}
 
 	if (moving) //check if moving
 	{
@@ -114,6 +141,7 @@ void Boss::update(Level1* world)
 	}
 
 	bossCounter++;
+	missileCounter++;
 
 	return;
 }

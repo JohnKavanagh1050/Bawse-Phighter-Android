@@ -5,14 +5,14 @@ USING_NS_CC;
 Missile * Missile::createMissile()
 {
 	Missile * missile = new Missile();
-	if (missile && missile->initWithFile("GameScreen/ss_boss1_attack.png", Rect(0, 0, 36, 36)))
+	if (missile && missile->initWithFile("GameScreen/ss_boss1_attack2.png", Rect(0, 0, 36, 36)))
 	{
 		//Create and run animation
 		Vector<SpriteFrame*> animFrames(5);
 		char str[100] = { 0 };
 		for (int i = 0; i < 5; i++)
 		{
-			sprintf(str, "GameScreen/ss_boss1_attack.png");
+			sprintf(str, "GameScreen/ss_boss1_attack2.png");
 			auto frame = SpriteFrame::create(str, Rect(36 * i, 0, 36, 36)); //we assume that the sprites' dimentions are 30x30 rectangles.
 			animFrames.pushBack(frame);
 		}
@@ -21,14 +21,14 @@ Missile * Missile::createMissile()
 		//make body for collisions
 		cocos2d::Size size(36, 36);
 		auto bossBulletBody = PhysicsBody::createBox(size);
-		bossBulletBody->setCollisionBitmask(0x000004);
+		bossBulletBody->setCollisionBitmask(0x000006);
 		bossBulletBody->setContactTestBitmask(true);
 		missile->setPhysicsBody(bossBulletBody);
-		missile->setTag(40);
+		missile->setTag(60);
 		missile->runAction(animate);
 		missile->autorelease();
 		missile->initMissile();
-		missile->setTag(40);
+		missile->setTag(60);
 		return missile;
 	}
 
@@ -53,11 +53,23 @@ void Missile::setTrue()
 void Missile::update()
 {
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
-	if (getPositionX() >= s.width / 2){
-		setPosition(getPositionX() - 1, getPositionY() + 1);
-	}
-	else{
-		setPosition(getPositionX() + 1, getPositionY() + 1);
+	switch (state)
+	{
+		case 'A':
+			if (getPositionX() >= s.width / 2){
+				setPosition(getPositionX() - 1, getPositionY() + 1);
+			}
+			else{
+				setPosition(getPositionX() + 1, getPositionY() + 1);
+			}
+			if (getPositionY() >= s.height - 50)
+			{
+				state = 'B';
+			}
+			break;
+		case 'B' :
+				setPosition(getPositionX(), getPositionY() - 10);
+			break;
 	}
 
 	timecounter++;
