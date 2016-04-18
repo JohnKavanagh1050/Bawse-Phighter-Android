@@ -16,8 +16,8 @@ Scene* PauseMenu::createScene()
 bool PauseMenu::init()
 {
 	auto menuTitle =
-		MenuItemImage::create("GameOverScreen/Game_Over.png",
-		"GameOverScreen/Game_Over.png");
+		MenuItemImage::create("PauseScreen/Game_Paused.png",
+		"PauseScreen/Game_Paused.png");
 	auto resumeItem =
 		MenuItemImage::create("PauseScreen/Resume_Button.png",
 		"PauseScreen/Resume_Button(Click).png",

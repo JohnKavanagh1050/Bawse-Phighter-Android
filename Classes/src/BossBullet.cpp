@@ -26,13 +26,46 @@ BossBullet * BossBullet::createBossBullet()
 		bossBullet->setPhysicsBody(bossBulletBody);
 		bossBulletBody->setTag(40);
 		bossBullet->runAction(animate);
-		bossBullet->autorelease();
 		bossBullet->initBullet();
 		bossBullet->setTag(40);
 		return bossBullet;
 	}
 
 	CC_SAFE_DELETE(bossBullet);
+	return NULL;
+}
+
+
+BossBullet * BossBullet::createBossBullet2()
+{
+	BossBullet * bossBullet2 = new BossBullet();
+	if (bossBullet2 && bossBullet2->initWithFile("GameScreen/ss_boss1_attack3.png", Rect(0, 0, 36, 36)))
+	{
+		//Create and run animation
+		Vector<SpriteFrame*> animFrames(5);
+		char str[100] = { 0 };
+		for (int i = 0; i < 5; i++)
+		{
+			sprintf(str, "GameScreen/ss_boss1_attack3.png");
+			auto frame = SpriteFrame::create(str, Rect(36 * i, 0, 36, 36)); //we assume that the sprites' dimentions are 30x30 rectangles.
+			animFrames.pushBack(frame);
+		}
+		auto animation = CCAnimation::createWithSpriteFrames(animFrames, 0.15f, 100000);
+		auto animate = CCAnimate::create(animation);
+		//make body for collisions
+		cocos2d::Size size(36, 36);
+		auto bossBulletBody = PhysicsBody::createBox(size);
+		bossBulletBody->setCollisionBitmask(0x000007);
+		bossBulletBody->setContactTestBitmask(true);
+		bossBullet2->setPhysicsBody(bossBulletBody);
+		bossBulletBody->setTag(70);
+		bossBullet2->runAction(animate);
+		bossBullet2->initBullet();
+		bossBullet2->setTag(70);
+		return bossBullet2;
+	}
+
+	CC_SAFE_DELETE(bossBullet2);
 	return NULL;
 }
 
@@ -55,6 +88,39 @@ void BossBullet::update()
 	setPositionY(getPositionY()-3);
 	timecounter++;
 	if (timecounter >= 1000){
+		remove = true;
+	}
+}
+
+void BossBullet::update2()
+{
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
+	switch (state)
+	{
+	case 'A':
+		if (getPositionX() >= s.width / 2){
+			setPosition(getPositionX() - 3, getPositionY() + 1);
+		}
+		else{
+			setPosition(getPositionX() + 3, getPositionY() + 1);
+		}
+		if (getPositionY() >= s.height - 50)
+		{
+			state = 'B';
+		}
+		break;
+	case 'B':
+		if (getPositionY() >= 100){
+			setPosition(getPositionX(), getPositionY() - 10);
+		}
+		else if (getPositionY() <= 100){
+			setPosition(getPositionX(), getPositionY());
+		}
+		break;
+	}
+
+	timecounter++;
+	if (timecounter >= 200){
 		remove = true;
 	}
 }

@@ -47,12 +47,11 @@ Boss * Boss::create()
 		auto animate = CCAnimate::create(animation);
 		cocos2d::Size size(134, 137);
 		auto bossBody = PhysicsBody::createBox(size);
-		bossBody->setCollisionBitmask(0x000002);
+		bossBody->setCollisionBitmask(0x000003);
 		bossBody->setContactTestBitmask(true);
 		bossBody->setTag(30);
 		boss->setPhysicsBody(bossBody);
 		boss->runAction(animate);
-		boss->autorelease();
 		boss->initBoss();
 		boss->setTag(30);
 		return boss;
@@ -83,6 +82,17 @@ std::vector<BossBullet*> Boss::getBullets()
 	return currentBossBullets;
 }
 
+std::vector<BossBullet*> Boss::getBullets2()
+{
+	return currentBossBullets2;
+}
+
+void Boss::deleteBossBullet2(Level1* world, int i)
+{
+	world->removeChild(currentBossBullets2[i]);
+	currentBossBullets2.erase(std::remove(currentBossBullets2.begin(), currentBossBullets2.end(), currentBossBullets2[i]));
+}
+
 void Boss::deleteMissile(Level1* world, int i)
 {
 	world->removeChild(currentMissiles[i]);
@@ -97,10 +107,10 @@ void Boss::deleteBossBullet(Level1* world, int i)
 
 void Boss::update(Level1* world)
 {
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
 	for (int i = 0; i < currentBossBullets.size(); i++){
 		if (currentBossBullets[i]->getRemove()){
 			deleteBossBullet(world, i);
-			//currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 		}
 		else currentBossBullets[i]->update();
 	}
@@ -108,10 +118,10 @@ void Boss::update(Level1* world)
 		BossBullet *bossBullet = BossBullet::createBossBullet();
 		currentBossBullets.push_back(bossBullet);
 		bossBullet->setPosition(getPosition().x, getPosition().y);
-		world->addChild(bossBullet, 5);
+		world->addChild(bossBullet, 3);
 		bossCounter = 0;
 	}
-	if (lives <= 40){
+	if (lives <= 25){
 		for (int i = 0; i < currentMissiles.size(); i++){
 			if (currentMissiles[i]->getRemove()){
 				deleteMissile(world, i);
@@ -122,28 +132,42 @@ void Boss::update(Level1* world)
 		if (missileCounter % (SECOND * 2) == 0){
 			Missile *missile = Missile::createMissile();
 			currentMissiles.push_back(missile);
-			missile->setPosition(getPosition().x, getPosition().y);
-			world->addChild(missile, 5);
+			missile->setPosition(getPosition().x, getPosition().y + 20);
+			world->addChild(missile, 3);
 			missileCounter = 0;
 		}
 	}
 
+	if (lives <= 10){
+		for (int i = 0; i < currentBossBullets2.size(); i++){
+			if (currentBossBullets2[i]->getRemove()){
+				deleteBossBullet2(world, i);
+			}
+			else currentBossBullets2[i]->update2();
+		}
+		if (missile2Counter % (SECOND * 2) == 0){
+			BossBullet *missile2 = BossBullet::createBossBullet2();
+			currentBossBullets2.push_back(missile2);
+			missile2->setPosition(getPosition().x, getPosition().y);
+			world->addChild(missile2, 3);
+			missile2Counter = 0;
+		}
+	}
 	if (moving) //check if moving
 	{
 		if (direction == 0) //check if going left
 		{
-			this->setPositionX(this->getPositionX() - 2);
+			setPosition(getPositionX() - 2, s.height - 150);
 		}
 		else if (direction == 1)  //right
 		{
-			this->setPositionX(this->getPositionX() + 2);
+			setPosition(getPositionX() + 2, s.height - 150);
 		}
 	}
 
 	bossCounter++;
 	missileCounter++;
-
-	return;
+	missile2Counter++;
 }
 
 float Boss::getLives(){

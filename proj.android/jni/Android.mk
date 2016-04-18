@@ -13,6 +13,7 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 LOCAL_SRC_FILES := hellocpp/main.cpp \
 			 ../../Classes/src/AppDelegate.cpp \
 			 ../../Classes/src/Boss.cpp \
+			 ../../Classes/src/Boss2.cpp \
 			 ../../Classes/src/BossBullet.cpp \
 			 ../../Classes/src/Bullet.cpp \
 			 ../../Classes/src/GameOverScene.cpp \
@@ -22,6 +23,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 			 ../../Classes/src/HealthBar.cpp \
 			 ../../Classes/src/LevelLoader.cpp \
 			 ../../Classes/src/MainMenuScene.cpp \
+			  ../../Classes/src/Missile.cpp \
 			 ../../Classes/src/PauseScene.cpp \
 			 ../../Classes/src/Player.cpp \
 			 ../../Classes/src/UpgradeScene.cpp 

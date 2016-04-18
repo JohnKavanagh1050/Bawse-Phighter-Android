@@ -65,7 +65,8 @@ bool Level1::init()
 		break;
 	case 'B':
 		auto mySprite = Sprite::create("GameScreen/Background2.png");
-		mySprite->setPosition(Vec2(s.width / 2, s.height / 2));
+		mySprite->setPosition(Point((visibleSize.width / 2) + origin.x, (visibleSize.height / 2) + origin.y));
+		mySprite->setScale(1,1);
 		this->addChild(mySprite, -1);
 
 		boss2 = Boss2::create();
@@ -143,6 +144,7 @@ void Level1::addBackGroundSprite(cocos2d::Size const & visibleSize, cocos2d::Poi
 
 void Level1::update(float dt)
 {
+	//switch statements to update different levels
 	switch (level)
 	{
 	case 'A':
@@ -217,11 +219,8 @@ void Level1::update(float dt)
 
 bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 {
-	PhysicsBody *a = contact.getShapeA()->getBody();
-	PhysicsBody *b = contact.getShapeB()->getBody();
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
-
 
 	if (nodeA && nodeB)
 	{
@@ -238,9 +237,28 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 					level = 'B';
 					//removes boss1
 					nodeB->removeFromParentAndCleanup(true);
+					//re-initilize level
 					init();
 				}
 				nodeA->removeFromParentAndCleanup(true);
+			}
+			//if bossbullet
+			else if (nodeB->getTag() == 40)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if bossbullet2
+			else if (nodeB->getTag() == 60)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if bossbullet3
+			else if (nodeB->getTag() == 70)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
 			}
 		}
 		//bullet and boss collision
@@ -259,7 +277,66 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				nodeB->removeFromParentAndCleanup(true);
 			}
 		}
-
+		//player and bossbullet collision
+		//if bossbullet1
+		else if (nodeA->getTag() == 40)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+				nodeA->removeFromParentAndCleanup(true);
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		//player and bossbullet2 collision
+		//if bossbullet1
+		else if (nodeA->getTag() == 60)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+				nodeA->removeFromParentAndCleanup(true);
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		//player and bossbullet collision
+		//if bossbullet3
+		else if (nodeA->getTag() == 70)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+				nodeA->removeFromParentAndCleanup(true);
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
 		//player and bossbullet collision
 		//if player
 		else if (nodeA->getTag() == 20)
@@ -274,41 +351,17 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				}
 				nodeB->removeFromParentAndCleanup(true);
 			}
-		}
-		//player and bossbullet collision
-		//if bossbullet
-		else if (nodeA->getTag() == 40)
-		{
-			//if player
-			if (nodeB->getTag() == 20)
+			//if bossbullet2
+			else if (nodeB->getTag() == 60)
 			{
-				player->loseLives();
-				if (player->getLives() <= 0){
-					activateGameOverScene(this);
-				}
-				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if bossbullet3
+			else if (nodeB->getTag() == 70)
+			{
+				nodeB->removeFromParentAndCleanup(true);
 			}
 		}
 	}
-
-	/*for (int i = 0; i < currentPlayerBullets.size(); i++){
-		if (0x000002 == a->getCollisionBitmask() && 0x000003 == b->getCollisionBitmask())
-		{
-		player->deletePlayerBullet(this, i);
-		boss->loseLives();
-		if (boss->getLives() <= 0){
-		activateGameScene2(this);
-		}
-		}
-		if (0x000003 == a->getCollisionBitmask() && 0x000002 == b->getCollisionBitmask())
-		{
-		player->deletePlayerBullet(this, i);
-		boss->loseLives();
-		if (boss->getLives() <= 0){
-		activateGameScene2(this);
-		}
-		}
-		}*/
-
 	return true;
 }

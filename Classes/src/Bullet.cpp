@@ -23,7 +23,7 @@ Bullet * Bullet::createPlayerBullet()
 		//make body for collisions
 		cocos2d::Size size(27, 27);
 		auto bulletBody = PhysicsBody::createBox(size);
-		bulletBody->setCollisionBitmask(0x000003);
+		bulletBody->setCollisionBitmask(0x000001);
 		bulletBody->setContactTestBitmask(true);
 		bulletBody->setTag(10);
 		playerBullet->setPhysicsBody(bulletBody);

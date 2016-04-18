@@ -20,7 +20,7 @@ Player * Player::create()
 		//make body for collisions
 		cocos2d::Size size(66, 99);
 		auto playerBody = PhysicsBody::createBox(size);
-		playerBody->setCollisionBitmask(0x000001);
+		playerBody->setCollisionBitmask(0x000002);
 		playerBody->setContactTestBitmask(true);
 		playerBody->setTag(20);
 		player->setPhysicsBody(playerBody);
@@ -65,7 +65,6 @@ void Player::update(Level1* world)
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (currentPlayerBullets[i]->getRemove()){
 			deletePlayerBullet(world, i);
-			//currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 		}
 		else currentPlayerBullets[i]->updatePlayerBullet();
 	}
@@ -111,7 +110,6 @@ void Player::updateLevel2(Level1* world)
 		
 	}
 	counter++;
-
 }
 
 
