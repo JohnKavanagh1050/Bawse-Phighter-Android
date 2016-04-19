@@ -17,8 +17,8 @@ public:
 	void idle();
 	void Defeated();
 	void deleteBossBullet(Level1* world, int i);
-	void deleteMissile(Level1* world, int i);
 	void deleteBossBullet2(Level1* world, int i);
+	void deleteBossBullet3(Level1* world, int i);
 	void loseLives();
 
 	bool Hit();
@@ -26,21 +26,16 @@ public:
 	float getLives();
 
 	std::vector<BossBullet*> getBullets();
-	std::vector<Missile*> getMissiles();
 	std::vector<BossBullet*> getBullets2();
+	std::vector<BossBullet*> getBullets3();
 private:
 	const short SECOND = 60;
 	int direction, lives;
 	bool moving;
 	bool hit;
-	short bossCounter;
-	short missileCounter;
-	short missile2Counter;
-//	Player* player;
+	short bossBulletCounter, bossBulletCounter2, bossBulletCounter3;
 
 	std::vector<BossBullet*> currentBossBullets;
-	std::vector<Missile*> currentMissiles;
 	std::vector<BossBullet*> currentBossBullets2;
-
-	//CCProgressTimer *healthBar;
+	std::vector<BossBullet*> currentBossBullets3;
 };

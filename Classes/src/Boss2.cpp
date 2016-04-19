@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-Boss2 * Boss2::create()
-{
+Boss2 * Boss2::create(){
 	Boss2 * boss2 = new Boss2();
 	if (boss2 && boss2->initWithFile("GameScreen/boss2.png", Rect(0, 0, 139, 199)))
 	{
@@ -35,30 +34,52 @@ Boss2 * Boss2::create()
 	return NULL;
 }
 
-void Boss2::move(int directionParam)
-{
+void Boss2::move(int directionParam){
 	direction = directionParam;
-	moving = true;
 }
 
-/*bool Boss::Hit()
-{
-hit = true;
-}*/
-
-std::vector<BossBullet*> Boss2::getBullets()
-{
+std::vector<Missile*> Boss2::getBullets(){
 	return currentBossBullets;
 }
 
-void Boss2::deleteBossBullet(Level1* world, int i)
-{
+std::vector<Missile*> Boss2::getBullets2(){
+	return currentBossBullets2;
+}
+
+std::vector<Missile*> Boss2::getBullets3(){
+	return currentBossBullets3;
+}
+
+void Boss2::deleteBossBullet(Level1* world, int i){
 	world->removeChild(currentBossBullets[i]);
 	currentBossBullets.erase(std::remove(currentBossBullets.begin(), currentBossBullets.end(), currentBossBullets[i]));
 }
 
-void Boss2::update(Level1* world)
-{
+void Boss2::deleteBossBullet2(Level1* world, int i){
+	world->removeChild(currentBossBullets2[i]);
+	currentBossBullets2.erase(std::remove(currentBossBullets2.begin(), currentBossBullets2.end(), currentBossBullets2[i]));
+}
+
+void Boss2::deleteBossBullet3(Level1* world, int i){
+	world->removeChild(currentBossBullets3[i]);
+	currentBossBullets3.erase(std::remove(currentBossBullets3.begin(), currentBossBullets3.end(), currentBossBullets3[i]));
+}
+
+void Boss2::update(Level1* world){
+	/*for (int i = 0; i < currentBossBullets.size(); i++){
+		if (currentBossBullets[i]->getRemove()){
+			deleteBossBullet(world, i);
+		}
+		else currentBossBullets[i]->update();
+	}
+	if (bossBulletCounter % (SECOND / 2) == 0){
+		Missile *missile = Missile::createMissile();
+		currentBossBullets.push_back(missile);
+		missile->setPosition(getPosition().x, getPosition().y);
+		world->addChild(missile, 3);
+		bossBulletCounter = 0;
+	}*/
+
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 	setPosition(Vec2(s.width / 2, s.height / 2));
 
@@ -75,6 +96,7 @@ void Boss2::update(Level1* world)
 	}
 
 	bossCounter++;
+	bossBulletCounter++;
 	return;
 }
 
@@ -86,12 +108,8 @@ void Boss2::loseLives(){
 	lives--;
 }
 
-void Boss2::idle()
-{
-	moving = false;
-}
-
 void Boss2::initBoss2(){
 	lives = 100;
 	bossCounter = 0;
+	bossBulletCounter = 0;
 }
