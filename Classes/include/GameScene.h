@@ -4,6 +4,7 @@
 #include "PauseScene.h"
 #include "GameData.h"
 #include "GameOverScene.h"
+#include "GameComplete.h"
 #include "GameStates.h"
 #include "GameScene2.h"
 #include "Bullet.h"
@@ -25,8 +26,8 @@ private:
 	Boss2* boss2;
 	//HealthBar* healthBar;
 
-	std::vector<Bullet*> currentPlayerBullets;
-	std::vector<BossBullet*> currentBossBullets;
+	//std::vector<Bullet*> currentPlayerBullets;
+	//std::vector<BossBullet*> currentBossBullets;
 
 	// local variable declaration:
 	char level = 'A';
@@ -40,6 +41,8 @@ public:
 	void activatePauseScene(Ref *pSender);
 	// Called at game over
 	void activateGameOverScene(Ref *pSender);
+	// called for game won scene
+	void activateGameCompleteScene(Ref *pSender);
 	//call menu
 	void activateMainMenuScene(Ref *pSender);
 	void activateGameScene2(Ref * pSender);

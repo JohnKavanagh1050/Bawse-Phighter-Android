@@ -164,6 +164,7 @@
     <ClInclude Include="..\Classes\include\Boss2.h" />
     <ClInclude Include="..\Classes\include\BossBullet.h" />
     <ClInclude Include="..\Classes\include\Bullet.h" />
+    <ClInclude Include="..\Classes\include\GameComplete.h" />
     <ClInclude Include="..\Classes\include\GameData.h" />
     <ClInclude Include="..\Classes\include\GameOverScene.h" />
     <ClInclude Include="..\Classes\include\GameScene.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="..\Classes\src\Boss2.cpp" />
     <ClCompile Include="..\Classes\src\BossBullet.cpp" />
     <ClCompile Include="..\Classes\src\Bullet.cpp" />
+    <ClCompile Include="..\Classes\src\GameComplete.cpp" />
     <ClCompile Include="..\Classes\src\GameData.cpp" />
     <ClCompile Include="..\Classes\src\GameOverScene.cpp" />
     <ClCompile Include="..\Classes\src\GameScene.cpp" />

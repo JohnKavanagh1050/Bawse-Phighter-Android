@@ -110,10 +110,11 @@ void Level1::activateGameOverScene(Ref *pSender)
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
-void Level1::activateGameScene2(Ref * pSender)
+void Level1::activateGameCompleteScene(Ref *pSender)
 {
-	auto scene = Level2::createScene();
+	auto scene = GameComplete::createScene();
 	Director::getInstance()->replaceScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("GameMusic.wav");
 }
 
 bool Level1::onTouchBegan(Touch *touch, Event *event)
@@ -249,6 +250,15 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
 			}
+			//if boss2
+			else if (nodeB->getTag() == 50)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				boss2->loseLives();
+				if (boss2->getLives() <= 0){
+					activateGameCompleteScene(this);
+				}
+			}
 			//if bossbullet2
 			else if (nodeB->getTag() == 60)
 			{
@@ -275,6 +285,20 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 					level = 'B';
 					nodeA->removeFromParentAndCleanup(true);
 					init();
+				}
+			}
+		}
+		//bullet and boss collision
+		//if boss2
+		else if (nodeA->getTag() == 50)
+		{
+			//if player
+			if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				boss2->loseLives();
+				if (boss2->getLives() <= 0){
+					activateGameCompleteScene(this);
 				}
 			}
 		}

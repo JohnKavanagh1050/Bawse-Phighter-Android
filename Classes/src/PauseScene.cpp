@@ -50,7 +50,7 @@ void PauseMenu::activateMainMenuScene(Ref *pSender)
 {
 	auto scene = MainMenu::createScene();
 	Director::getInstance()->popScene();
-	Director::getInstance()->replaceScene(scene);
+	Director::getInstance()->replaceScene(TransitionSlideInB::create(1, scene));
 }
 
 void PauseMenu::retry(Ref *pSender)

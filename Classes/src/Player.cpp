@@ -62,6 +62,7 @@ std::vector<Bullet*> Player::getBullets()
 
 void Player::update(Level1* world)
 {	
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (currentPlayerBullets[i]->getRemove()){
 			deletePlayerBullet(world, i);
@@ -82,11 +83,33 @@ void Player::update(Level1* world)
 		setPositionX(getPosition().x + dirX * speed);
 		setPositionY(getPosition().y + dirY * speed) ;
 	}
+	if (getPositionX() >= s.width - 50)
+	{
+		setPosition(s.width - 50, getPositionY());
+	}
+
+	if (getPositionY() >= s.height - 220)
+	{
+		setPosition(getPositionX(), s.height - 220);
+	}
+	if (getPositionX() <= 30)
+	{
+		setPosition(30, getPositionY());
+	}
+
+	if (getPositionY() <= 30)
+	{
+		setPosition(getPositionX(), 30);
+	}
+
 	counter++;
 }
 
 void Player::updateLevel2(Level1* world)
 {
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
+	//Vec2 rotation = Vec2(s.width / 2, s.height / 2);
+	//setRotation(rotation);
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (currentPlayerBullets[i]->getRemove()){
 			deletePlayerBullet(world, i);
@@ -108,6 +131,25 @@ void Player::updateLevel2(Level1* world)
 		setPositionX(getPosition().x + dirX * speed);
 		setPositionY(getPosition().y + dirY * speed);
 		
+	}
+
+	if (getPositionX() >= s.width - 50)
+	{ 
+		setPosition(s.width - 50, getPositionY());
+	}
+
+	if (getPositionY() >= s.height - 50)
+	{
+		setPosition(getPositionX(), s.height - 50);
+	}
+	if (getPositionX() <= 30)
+	{
+		setPosition(30, getPositionY());
+	}
+
+	if (getPositionY() <= 30)
+	{
+		setPosition(getPositionX(), 30);
 	}
 	counter++;
 }

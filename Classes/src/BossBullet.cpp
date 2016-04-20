@@ -102,7 +102,6 @@ BossBullet * BossBullet::createBossBullet3()
 	return NULL;
 }
 
-
 bool BossBullet::getRemove(){
 	return remove;
 }
@@ -112,8 +111,7 @@ void BossBullet::initBullet(){
 	remove = false;
 }
 
-void BossBullet::setTrue()
-{
+void BossBullet::setTrue(){
 	remove = true;
 }
 

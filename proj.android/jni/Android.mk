@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 			 ../../Classes/src/Boss2.cpp \
 			 ../../Classes/src/BossBullet.cpp \
 			 ../../Classes/src/Bullet.cpp \
+			 ../../Classes/src/GameComplete.cpp \
 			 ../../Classes/src/GameOverScene.cpp \
 			 ../../Classes/src/GameScene.cpp \
 			 ../../Classes/src/GameScene2.cpp \

@@ -143,5 +143,5 @@ void Boss::idle(){
 }
 
 void Boss::initBoss(){
-	lives = 2;
+	lives = 50;
 }
