@@ -51,6 +51,8 @@ void PauseMenu::activateMainMenuScene(Ref *pSender)
 	auto scene = MainMenu::createScene();
 	Director::getInstance()->popScene();
 	Director::getInstance()->replaceScene(TransitionSlideInB::create(1, scene));
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("MenuMusic.wav", true);
 }
 
 void PauseMenu::retry(Ref *pSender)
@@ -58,4 +60,6 @@ void PauseMenu::retry(Ref *pSender)
 	auto scene = Level1::createScene();
 	Director::getInstance()->popScene();
 	Director::getInstance()->replaceScene(scene);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic("MenuMusic.wav");
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("GameMusic.wav", true);
 }

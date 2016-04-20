@@ -172,24 +172,23 @@ void Player::updateLevel2(Level1* world)
 		setPositionY(getPosition().y + dirY * speed);
 		
 	}
-
+	//boundaries
 	if (getPositionX() >= s.width - 50)
 	{ 
 		setPosition(s.width - 50, getPositionY());
 	}
-
 	if (getPositionY() >= s.height - 50)
 	{
 		setPosition(getPositionX(), s.height - 50);
 	}
-	if (getPositionX() <= 30)
+	if (getPositionX() <= 35)
 	{
-		setPosition(30, getPositionY());
+		setPosition(35, getPositionY());
 	}
 
-	if (getPositionY() <= 30)
+	if (getPositionY() <= 35)
 	{
-		setPosition(getPositionX(), 30);
+		setPosition(getPositionX(), 35);
 	}
 	counter++;
 }

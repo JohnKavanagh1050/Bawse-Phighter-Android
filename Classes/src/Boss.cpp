@@ -85,8 +85,8 @@ void Boss::update(Level1* world){
 		Vec2 vertices2[] =
 		{
 			Vec2(0, 10),
-			Vec2((10 * lives) / 5, 10),
-			Vec2((10 * lives) / 5, 0),
+			Vec2((10 * lives) / 4, 10),
+			Vec2((10 * lives) / 4, 0),
 			Vec2(0, 0)
 		};
 		rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, .5));
@@ -106,7 +106,7 @@ void Boss::update(Level1* world){
 		world->addChild(bossBullet, 3);
 		bossBulletCounter = 0;
 	}
-	if (lives <= 40){
+	if (lives <= 30){
 		for (int i = 0; i < currentBossBullets2.size(); i++){
 			if (currentBossBullets2[i]->getRemove()){
 				deleteBossBullet2(world, i);
@@ -123,7 +123,7 @@ void Boss::update(Level1* world){
 		}
 	}
 
-	if (lives <= 25){
+	if (lives <= 20){
 		for (int i = 0; i < currentBossBullets3.size(); i++){
 			if (currentBossBullets3[i]->getRemove()){
 				deleteBossBullet3(world, i);
@@ -168,7 +168,7 @@ void Boss::idle(){
 }
 
 void Boss::initBoss(){
-	lives = 50;	//health bars 
+	lives = 40;	//health bars 
 	rectWithBorder = DrawNode::create();
 	Vec2 vertices[] =
 	{
@@ -185,8 +185,8 @@ void Boss::initBoss(){
 	Vec2 vertices2[] =
 	{
 		Vec2(0, 10),
-		Vec2((10 * lives) / 5, 10),
-		Vec2((10 * lives) / 5, 0),
+		Vec2((10 * lives) / 4, 10),
+		Vec2((10 * lives) / 4, 0),
 		Vec2(0, 0)
 	};
 	rectWithBorder2->setPosition(getPositionX() +  10, getPosition().y + 140);

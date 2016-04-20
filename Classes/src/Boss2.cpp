@@ -359,7 +359,7 @@ void Boss2::loseLives(){
 }
 
 void Boss2::initBoss2(){
-	lives = 100;
+	lives = 90;
 	bossCounter = 0;
 	bossBulletCounter = 0;
 

@@ -33,6 +33,8 @@ bool GameOver::init()
 	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
 	this->addChild(menu);
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("iamdeath.wav");
+
 	return true;
 }
 

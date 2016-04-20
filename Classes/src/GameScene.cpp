@@ -233,10 +233,11 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if boss
 			if (nodeB->getTag() == 30)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("bossHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
-					//boss->removehealthBar();
+					boss->removehealthBar();
 					//start level 2 switch statement
 					level = 'B';
 					//removes boss1
@@ -251,10 +252,12 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 			//if boss2
 			else if (nodeB->getTag() == 50)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("bossHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				boss2->loseLives();
 				if (boss2->getLives() <= 0){
@@ -266,30 +269,35 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 			//if boss1bullet3
 			else if (nodeB->getTag() == 70)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 			//if boss2bullet2
 			else if (nodeB->getTag() == 80)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 			//if boss2bullet3
 			else if (nodeB->getTag() == 90)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 			//if boss2bullet3
 			else if (nodeB->getTag() == 100)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//bullet and boss collision
@@ -299,10 +307,11 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			// if bullet
 			if (nodeB->getTag() == 10)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("bossHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
-					//boss->removehealthBar();
+					boss->removehealthBar();
 					level = 'B';
 					nodeA->removeFromParentAndCleanup(true);
 					init();
@@ -314,9 +323,10 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 		//if boss2
 		else if (nodeA->getTag() == 50)
 		{
-			//if player
+			//if player bullet
 			if (nodeB->getTag() == 10)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("bossHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				boss2->loseLives();
 				if (boss2->getLives() <= 0){
@@ -332,6 +342,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -343,6 +354,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and bossbullet2 collision
@@ -352,6 +364,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -363,6 +376,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and boss1bullet collision
@@ -372,6 +386,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -383,6 +398,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and bossbullet collision
@@ -392,6 +408,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -404,6 +421,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and bossbullet collision
@@ -413,6 +431,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -424,6 +443,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and bossbullet collision
@@ -433,6 +453,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if player
 			if (nodeB->getTag() == 20)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeA->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -444,6 +465,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				nodeA->removeFromParentAndCleanup(true);
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("metalBang.wav");
 			}
 		}
 		//player and bossbullet collision
@@ -453,6 +475,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if bossbullet
 			if (nodeB->getTag() == 40)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -463,6 +486,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if bossbullet2
 			else if (nodeB->getTag() == 60)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -472,6 +496,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if bossbullet3
 			else if (nodeB->getTag() == 70)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -481,6 +506,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if boss2bullet1
 			else if (nodeB->getTag() == 80)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
@@ -490,15 +516,17 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			//if boss2bullet2
 			else if (nodeB->getTag() == 90)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
 					activateGameOverScene(this);
 				}
 			}
-			//if boss2bullet2
+			//if boss2bullet3
 			else if (nodeB->getTag() == 100)
 			{
+				CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("playerHit.wav");
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();
 				if (player->getLives() <= 0){
