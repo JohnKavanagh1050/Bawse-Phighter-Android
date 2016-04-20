@@ -66,7 +66,32 @@ void Boss::deleteBossBullet3(Level1* world, int i){
 	currentBossBullets3.erase(std::remove(currentBossBullets3.begin(), currentBossBullets3.end(), currentBossBullets3[i]));
 }
 
+void Boss::removehealthBar(){
+	rectWithBorder->removeFromParentAndCleanup(true);
+	rectWithBorder2->removeFromParentAndCleanup(true);
+}
+
 void Boss::update(Level1* world){
+		//health bars
+		Vec2 vertices[] =
+		{
+			Vec2(0, 10),
+			Vec2(100, 10),
+			Vec2(100, 0),
+			Vec2(0, 0)
+		};
+		rectWithBorder->drawPolygon(vertices, 4, Color4F(1.0f, 0.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 0));
+
+		Vec2 vertices2[] =
+		{
+			Vec2(0, 10),
+			Vec2((10 * lives) / 5, 10),
+			Vec2((10 * lives) / 5, 0),
+			Vec2(0, 0)
+		};
+		rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, .5));
+	
+		
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 	for (int i = 0; i < currentBossBullets.size(); i++){
 		if (currentBossBullets[i]->getRemove()){
@@ -124,7 +149,7 @@ void Boss::update(Level1* world){
 			setPosition(getPositionX() + 2, s.height - 150);
 		}
 	}
-
+	setRotation(0);
 	bossBulletCounter++;
 	bossBulletCounter2++;
 	bossBulletCounter3++;
@@ -143,5 +168,28 @@ void Boss::idle(){
 }
 
 void Boss::initBoss(){
-	lives = 50;
+	lives = 50;	//health bars 
+	rectWithBorder = DrawNode::create();
+	Vec2 vertices[] =
+	{
+		Vec2(0, 10),
+		Vec2(100, 10),
+		Vec2(100, 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder->setPosition(getPosition().x + 10, getPosition().y + 140);
+	rectWithBorder->drawPolygon(vertices, 4, Color4F(1.0f, 0.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 0));
+	addChild(rectWithBorder);
+
+	rectWithBorder2 = DrawNode::create();
+	Vec2 vertices2[] =
+	{
+		Vec2(0, 10),
+		Vec2((10 * lives) / 5, 10),
+		Vec2((10 * lives) / 5, 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder2->setPosition(getPositionX() +  10, getPosition().y + 140);
+	rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, .5));
+	addChild(rectWithBorder2);
 }

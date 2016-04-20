@@ -236,15 +236,17 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				nodeA->removeFromParentAndCleanup(true);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
+					//boss->removehealthBar();
 					//start level 2 switch statement
 					level = 'B';
 					//removes boss1
 					nodeB->removeFromParentAndCleanup(true);
 					//re-initilize level
 					init();
+					player->setLives();
 				}
 			}
-			//if bossbullet
+			//if boss1bullet
 			else if (nodeB->getTag() == 40)
 			{
 				nodeA->removeFromParentAndCleanup(true);
@@ -259,14 +261,32 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 					activateGameCompleteScene(this);
 				}
 			}
-			//if bossbullet2
+			//if boss1bullet2
 			else if (nodeB->getTag() == 60)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
 			}
-			//if bossbullet3
+			//if boss1bullet3
 			else if (nodeB->getTag() == 70)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if boss2bullet2
+			else if (nodeB->getTag() == 80)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if boss2bullet3
+			else if (nodeB->getTag() == 90)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				nodeB->removeFromParentAndCleanup(true);
+			}
+			//if boss2bullet3
+			else if (nodeB->getTag() == 100)
 			{
 				nodeA->removeFromParentAndCleanup(true);
 				nodeB->removeFromParentAndCleanup(true);
@@ -282,9 +302,11 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				nodeB->removeFromParentAndCleanup(true);
 				boss->loseLives();
 				if (boss->getLives() <= 0){
+					//boss->removehealthBar();
 					level = 'B';
 					nodeA->removeFromParentAndCleanup(true);
 					init();
+					player->setLives();
 				}
 			}
 		}
@@ -299,11 +321,12 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				boss2->loseLives();
 				if (boss2->getLives() <= 0){
 					activateGameCompleteScene(this);
+					player->setLives();
 				}
 			}
 		}
 		//player and bossbullet collision
-		//if bossbullet1
+		//if boss1bullet1
 		else if (nodeA->getTag() == 40)
 		{
 			//if player
@@ -323,7 +346,7 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			}
 		}
 		//player and bossbullet2 collision
-		//if bossbullet1
+		//if boss1bullet2
 		else if (nodeA->getTag() == 60)
 		{
 			//if player
@@ -342,8 +365,8 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				nodeA->removeFromParentAndCleanup(true);
 			}
 		}
-		//player and bossbullet collision
-		//if bossbullet3
+		//player and boss1bullet collision
+		//if boss1bullet3
 		else if (nodeA->getTag() == 70)
 		{
 			//if player
@@ -354,7 +377,67 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 				if (player->getLives() <= 0){
 					activateGameOverScene(this);
 				}
-				
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		//player and bossbullet collision
+		//if boss2bullet1
+		else if (nodeA->getTag() == 80)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		//player and bossbullet collision
+		//if boss2bullet2
+		else if (nodeA->getTag() == 90)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+			}
+			//if bullet
+			else if (nodeB->getTag() == 10)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				nodeA->removeFromParentAndCleanup(true);
+			}
+		}
+		//player and bossbullet collision
+		//if boss2bullet3
+		else if (nodeA->getTag() == 100)
+		{
+			//if player
+			if (nodeB->getTag() == 20)
+			{
+				nodeA->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
 			}
 			//if bullet
 			else if (nodeB->getTag() == 10)
@@ -388,6 +471,33 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact &contact)
 			}
 			//if bossbullet3
 			else if (nodeB->getTag() == 70)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+			}
+			//if boss2bullet1
+			else if (nodeB->getTag() == 80)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+			}
+			//if boss2bullet2
+			else if (nodeB->getTag() == 90)
+			{
+				nodeB->removeFromParentAndCleanup(true);
+				player->loseLives();
+				if (player->getLives() <= 0){
+					activateGameOverScene(this);
+				}
+			}
+			//if boss2bullet2
+			else if (nodeB->getTag() == 100)
 			{
 				nodeB->removeFromParentAndCleanup(true);
 				player->loseLives();

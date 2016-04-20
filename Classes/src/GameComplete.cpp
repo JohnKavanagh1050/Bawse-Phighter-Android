@@ -45,5 +45,5 @@ void GameComplete::activateGameScene(cocos2d::Ref *pSender)
 void GameComplete::activateMainMenuScene(cocos2d::Ref *pSender)
 {
 	auto scene = MainMenu::createScene();
-	Director::getInstance()->replaceScene(TransitionSlideInT::create(1, scene));
+	Director::getInstance()->replaceScene(TransitionSlideInB::create(1, scene));
 }

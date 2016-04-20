@@ -19,6 +19,7 @@ public:
 	void deleteBossBullet2(Level1* world, int i);
 	void deleteBossBullet3(Level1* world, int i);
 	void loseLives();
+	void removehealthBar();
 
 	bool Hit();
 
@@ -37,4 +38,7 @@ private:
 	std::vector<BossBullet*> currentBossBullets;
 	std::vector<BossBullet*> currentBossBullets2;
 	std::vector<BossBullet*> currentBossBullets3;
+
+	cocos2d::DrawNode* rectWithBorder;
+	cocos2d::DrawNode* rectWithBorder2;
 };

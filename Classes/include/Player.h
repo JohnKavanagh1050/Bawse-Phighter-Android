@@ -18,9 +18,8 @@ public:
 	void loseLives();
 	void deletePlayerBullet(Level1* world, int i);
 
-	bool Hit();
-
 	float getLives();
+	float setLives();
 
 	std::vector<Bullet*> getBullets();
 private:
@@ -37,4 +36,9 @@ private:
 	const short SECOND = 60;
 
 	std::vector<Bullet*> currentPlayerBullets;
+
+	cocos2d::DrawNode* rectWithBorder;
+	cocos2d::DrawNode* rectWithBorder2;
+	cocos2d::DrawNode* rectWithBorder3;
+	cocos2d::DrawNode* rectWithBorder4;
 };

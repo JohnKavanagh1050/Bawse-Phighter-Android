@@ -24,6 +24,7 @@ Player * Player::create()
 		playerBody->setContactTestBitmask(true);
 		playerBody->setTag(20);
 		player->setPhysicsBody(playerBody);
+
 		player->runAction(animate);
 		player->initPlayer();
 		player->setTag(20);
@@ -40,12 +41,12 @@ void Player::move(float x ,float y)
 	moving = true;
 }
 
-/*bool Player::Hit()
-{
-	hit = true;
-}*/
-
 float Player::getLives(){
+	return lives;
+}
+
+float Player::setLives(){
+	lives = 10;
 	return lives;
 }
 
@@ -78,11 +79,31 @@ void Player::update(Level1* world)
 		counter = 0;
 	}
 
+	//health bars 
+	Vec2 vertices[] =
+	{
+		Vec2(0, 10),
+		Vec2(100, 10),
+		Vec2(100, 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder->drawPolygon(vertices, 4, Color4F(1.0f, 0.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 0));
+
+	Vec2 vertices2[] =
+	{
+		Vec2(0, 10),
+		Vec2((10 * lives), 10),
+		Vec2((10 * lives), 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 1));
+
 	if (moving) //check if moving
 	{
 		setPositionX(getPosition().x + dirX * speed);
 		setPositionY(getPosition().y + dirY * speed) ;
 	}
+	//boundaries for level 1
 	if (getPositionX() >= s.width - 50)
 	{
 		setPosition(s.width - 50, getPositionY());
@@ -101,14 +122,33 @@ void Player::update(Level1* world)
 	{
 		setPosition(getPositionX(), 30);
 	}
-
+	//keep player facing upwards 
+	setRotation(0);
 	counter++;
 }
 
 void Player::updateLevel2(Level1* world)
 {
+	//health bars 
+	Vec2 vertices[] =
+	{
+		Vec2(0, 10),
+		Vec2(100, 10),
+		Vec2(100, 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder->drawPolygon(vertices, 4, Color4F(1.0f, 0.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 0));
+	Vec2 vertices2[] =
+	{
+		Vec2(0, 10),
+		Vec2((10 * lives), 10),
+		Vec2((10 * lives), 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 1));
+
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
-	//Vec2 rotation = Vec2(s.width / 2, s.height / 2);
+
 	//setRotation(rotation);
 	for (int i = 0; i < currentPlayerBullets.size(); i++){
 		if (currentPlayerBullets[i]->getRemove()){
@@ -168,4 +208,28 @@ void Player::initPlayer(){
 	speed = 5.f;
 	dirX = dirY = 0;
 	lives = 10;
+
+	rectWithBorder = DrawNode::create();
+	Vec2 vertices[] =
+	{
+		Vec2(0, 10),
+		Vec2(100, 10),
+		Vec2(100, 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder->setPosition(getPositionX(), getPositionY() - 5);
+	rectWithBorder->drawPolygon(vertices, 4, Color4F(1.0f, 0.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, 0));
+	addChild(rectWithBorder);
+
+	rectWithBorder2 = DrawNode::create();
+	Vec2 vertices2[] =
+	{
+		Vec2(0, 10),
+		Vec2((10 * lives), 10),
+		Vec2((10 * lives), 0),
+		Vec2(0, 0)
+	};
+	rectWithBorder2->setPosition(getPositionX(), getPositionY() - 5);
+	rectWithBorder2->drawPolygon(vertices2, 4, Color4F(0.0f, 1.0f, 0.0f, 1), 3, Color4F(0.0f, 0.0f, 0.0f, .5));
+	addChild(rectWithBorder2);
 }
