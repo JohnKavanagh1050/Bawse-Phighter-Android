@@ -118,7 +118,7 @@ void BossBullet::setTrue(){
 void BossBullet::update(){
 	setPositionY(getPositionY()-3);
 	timecounter1++;
-	if (timecounter1 >= 1000){
+	if (timecounter1 >= 300){
 		remove = true;
 	}
 }
@@ -145,7 +145,7 @@ void BossBullet::update2(){
 	}
 
 	timecounter2++;
-	if (timecounter2 >= 1000){
+	if (timecounter2 >= 300){
 		remove = true;
 	}
 }

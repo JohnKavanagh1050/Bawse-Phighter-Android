@@ -28,8 +28,8 @@ bool MainMenu::init()
 		"MainMenuScreen/Play_Button(Click).png",
 		CC_CALLBACK_1(MainMenu::activateGameScene, this));
 	auto upgradeItem =
-		MenuItemImage::create("MainMenuScreen/Upgrade_Button.png",
-		"MainMenuScreen/Upgrade_Button(Click).png",
+		MenuItemImage::create("MainMenuScreen/About_Button.png",
+		"MainMenuScreen/About_Button(Click).png",
 	CC_CALLBACK_1(MainMenu::activateUpgradeScene, this));
 	auto exitItem =
 		MenuItemImage::create("MainMenuScreen/Exit_Button.png",

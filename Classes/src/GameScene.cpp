@@ -66,8 +66,10 @@ bool Level1::init()
 		break;
 	case 'B':
 		auto mySprite = Sprite::create("GameScreen/Background2.png");
-		mySprite->setPosition(Point((visibleSize.width / 2) + origin.x, (visibleSize.height / 2) + origin.y));
-		mySprite->setScale(1,1);
+		mySprite->setScaleX((s.width / mySprite->getContentSize().width));
+		mySprite->setScaleY((s.height / mySprite->getContentSize().height));
+		// bottom left
+		mySprite->setAnchorPoint(cocos2d::Vec2(0, 0));
 		this->addChild(mySprite, -1);
 
 		boss2 = Boss2::create();

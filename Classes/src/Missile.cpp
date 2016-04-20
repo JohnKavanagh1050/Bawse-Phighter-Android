@@ -116,7 +116,7 @@ void Missile::update1(){
 	setPosition(getPositionX() + 5, getPositionY() + 3);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -124,7 +124,7 @@ void Missile::update2(){
 	setPosition(getPositionX() - 5, getPositionY() + 3);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -132,7 +132,7 @@ void Missile::update3(){
 	setPosition(getPositionX() + 5, getPositionY() - 3);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -140,7 +140,7 @@ void Missile::update4(){
 	setPosition(getPositionX() - 5, getPositionY() - 3);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -149,7 +149,7 @@ void Missile::update5(){
 	setPosition(getPositionX() + 6, getPositionY());
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -157,7 +157,7 @@ void Missile::update6(){
 	setPosition(getPositionX() - 6, getPositionY());
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -165,7 +165,7 @@ void Missile::update7(){
 	setPosition(getPositionX(), getPositionY() - 4);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -173,7 +173,7 @@ void Missile::update8(){
 	setPosition(getPositionX(), getPositionY() + 4);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -182,7 +182,7 @@ void Missile::update9(){
 	setPosition(getPositionX() + 6, getPositionY() - 1);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -190,7 +190,7 @@ void Missile::update10(){
 	setPosition(getPositionX() - 6, getPositionY() + 1);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -198,7 +198,7 @@ void Missile::update11(){
 	setPosition(getPositionX() - 6, getPositionY() - 1);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }
@@ -206,7 +206,7 @@ void Missile::update12(){
 	setPosition(getPositionX() + 6, getPositionY() + 1);
 	//setPosition(getPositionX() + num, getPositionY() + num);
 	timecounter++;
-	if (timecounter >= 1000){
+	if (timecounter >= 300){
 		remove = true;
 	}
 }

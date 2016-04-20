@@ -19,21 +19,24 @@ bool UpgradeMenu::init()
 	{
 		return false;
 	}
-
-	auto upgradeTitle =
-		MenuItemImage::create("UpgradeScreen/Upgrade.png",
-		"UpgradeScreen/Upgrade.png");
+	CCSize s = CCDirector::sharedDirector()->getWinSize();
+	auto mySprite = Sprite::create("UpgradeScreen/tutorial.png");
+	mySprite->setScaleX((s.width / mySprite->getContentSize().width));
+	mySprite->setScaleY((s.height / mySprite->getContentSize().height));
+	// bottom left
+	mySprite->setAnchorPoint(cocos2d::Vec2(0, 0));
+	this->addChild(mySprite, -1);
 
 	auto mainMenuItem =
 		MenuItemImage::create("UpgradeScreen/Menu_Button.png",
 		"UpgradeScreen/Menu_Button(Click).png",
 		CC_CALLBACK_1(UpgradeMenu::activateMainMenuScene, this));
 	
-	auto menu = Menu::create(upgradeTitle, mainMenuItem, NULL);
+	auto menu = Menu::create(mainMenuItem, NULL);
 
 	// Returns visible size of OpenGL window in points.
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	menu->alignItemsVerticallyWithPadding(visibleSize.height / 20);
+	menu->setPosition(150, s.height - 100);
 	this->addChild(menu);
 
 	return true;
